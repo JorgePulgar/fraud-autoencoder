@@ -22,7 +22,7 @@
 - [x] **Task 1.2** — Create folder structure: `data/raw/`, `models/`, `notebooks/`, `src/`, `reports/figures/`. Add a `.gitkeep` file inside each empty folder so they are tracked.
   - Commit: `chore(repo): scaffold folder structure`
 
-- [ ] **Task 1.3** — Create `requirements.txt` with pinned versions for: `torch`, `numpy`, `pandas`, `scikit-learn`, `joblib`, `matplotlib`, `seaborn`, `onnx`, `onnxruntime`, `jupyter`. Use versions known to be compatible with Python 3.10+. Verify by running `pip install -r requirements.txt` in a fresh venv and confirming no errors.
+- [x] **Task 1.3** — Create `requirements.txt` with pinned versions for: `torch`, `numpy`, `pandas`, `scikit-learn`, `joblib`, `matplotlib`, `seaborn`, `onnx`, `onnxruntime`, `jupyter`. Use versions known to be compatible with Python 3.10+. Verify by running `pip install -r requirements.txt` in a fresh venv and confirming no errors.
   Note: `joblib` is pinned explicitly (not relied on as a sklearn transitive dep) because Phase 2 Task 2.4 saves the scaler via `joblib.dump`.
   - Commit: `chore(deps): pin python dependencies`
 
