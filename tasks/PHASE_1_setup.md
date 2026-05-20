@@ -42,7 +42,7 @@
 - [x] **Task 1.6** — Create a tiny `src/utils.py` with a `set_seeds(seed: int)` function that seeds `random`, `numpy`, and `torch` (including `torch.cuda` and deterministic flags). Verify by importing and running it.
   - Commit: `feat(utils): add deterministic seed setter`
 
-- [ ] **Task 1.7** — Smoke test: create a temporary script `test_setup.py` at project root that imports `src.config` and `src.utils`, calls `set_seeds(42)`, and prints "OK". Run it. After it passes, delete it and do NOT commit the deletion separately — just don't add it. (If accidentally committed, remove in a `chore` commit.)
+- [x] **Task 1.7** — Smoke test: create a temporary script `test_setup.py` at project root that imports `src.config` and `src.utils`, calls `set_seeds(42)`, and prints "OK". Run it. After it passes, delete it and do NOT commit the deletion separately — just don't add it. (If accidentally committed, remove in a `chore` commit.)
   - No commit needed if test script is never staged.
 
 ## Definition of done for Phase 1
