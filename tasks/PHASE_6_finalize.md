@@ -14,7 +14,7 @@
 
 ## Tasks
 
-- [ ] **Task 6.1** — Create `notebooks/02_results.ipynb` with the following structure:
+- [x] **Task 6.1** — Create `notebooks/02_results.ipynb` with the following structure:
   1. Markdown: title, problem statement (the "why an autoencoder" framing from `CONTEXT.md`)
   2. Imports + load model, scaler, threshold from disk
   3. Reload data via `prepare_data`
