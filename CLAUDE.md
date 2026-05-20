@@ -57,8 +57,21 @@ These are locked-in decisions from `CONTEXT.md`. Do not relitigate them mid-impl
 
 ## Pointers
 
-- `CONTEXT.md` — project spec, locked-in decisions, success criteria.
+- `CONTEXT.md` — v1 project spec, locked-in decisions, success criteria.
 - `WORKFLOW.md` — detailed conventions, commit message format, end-of-phase protocol.
-- `tasks/PHASES.md` — roadmap and status.
-- `tasks/PHASE_N_*.md` — current phase's task checklist.
+- `tasks/PHASES.md` — v1 roadmap and status.
+- `tasks/PHASE_N_*.md` — v1 current phase's task checklist.
 - `DEVLOG.md` — running log of issues and resolutions.
+
+## v2 demo project
+
+The same repo also contains v2 — a static in-browser demo built on v1's artifacts. If the user indicates v2 work (mentions "v2", "demo", `demo/`, GitHub Pages, ONNX Runtime Web, etc.), switch session-start protocol to:
+
+1. Read `CONTEXT-v2.md` in full.
+2. Read `tasks/v2/PHASES.md`.
+3. Read the current v2 phase file in `tasks/v2/PHASE_N_*.md`.
+4. Run `git log -n 20 --oneline --decorate` and `git log -n 5 --stat`.
+5. State which v2 phase you're working on and which tasks are unchecked.
+6. Wait for the user to confirm before starting any task.
+
+All execution rules above (one task = one commit, conventional commits, never check a box for unverified work) apply identically to v2. The v2 demo lives in `demo/`; the asset export script lives in `src/export_demo_assets.py` (added in v2 Phase 1, not part of v1).
