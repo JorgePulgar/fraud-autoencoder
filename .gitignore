@@ -17,7 +17,8 @@ env/
 ENV/
 
 # Data (never commit raw CSV)
-data/raw/
+data/raw/*
+!data/raw/.gitkeep
 data/processed/
 
 # Model artifacts
@@ -43,11 +44,12 @@ reports/figures/*.svg
 Thumbs.db
 desktop.ini
 
-# IDE
+# IDE / tooling
 .vscode/
 .idea/
 *.swp
 *.swo
+.claude/
 
 # Pytest / coverage
 .pytest_cache/
