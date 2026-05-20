@@ -68,6 +68,9 @@ def prepare_data(seed: int) -> dict:
 
     # Fit scaler on legit training rows only — no leakage
     X_train_legit = X_train_full[y_train_full == 0]
+    assert X_train_legit.shape[0] == (y_train_full == 0).sum(), (
+        "Scaler was fitted on more rows than legit training samples — leakage detected."
+    )
     scaler = fit_scaler(X_train_legit)
 
     Config.MODELS_DIR.mkdir(parents=True, exist_ok=True)
