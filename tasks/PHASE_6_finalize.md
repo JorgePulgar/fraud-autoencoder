@@ -63,7 +63,7 @@
   Verify by viewing the README in a markdown previewer.
   - Commit: `docs(readme): add full project readme`
 
-- [ ] **Task 6.3** — Add a `LICENSE` file (MIT).
+- [x] **Task 6.3** — Add a `LICENSE` file (MIT).
   - Commit: `docs(license): add MIT license`
 
 - [ ] **Task 6.4** — Final reproducibility dry-run. In a fresh terminal:
