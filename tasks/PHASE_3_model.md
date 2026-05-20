@@ -27,7 +27,7 @@
 - [x] **Task 3.3** — In `src/train.py`, implement the `train_one_epoch(model, loader, optimizer, device) -> float` function that runs one epoch and returns the average training loss.
   - Commit: `feat(train): add single-epoch training step`
 
-- [ ] **Task 3.4** — In `src/train.py`, implement `evaluate_loss(model, loader, device) -> float` that runs in `torch.no_grad()` and returns average MSE over the loader.
+- [x] **Task 3.4** — In `src/train.py`, implement `evaluate_loss(model, loader, device) -> float` that runs in `torch.no_grad()` and returns average MSE over the loader.
   - Commit: `feat(train): add validation loss evaluation`
 
 - [ ] **Task 3.5** — In `src/train.py`, implement the main `train(config) -> None` function that orchestrates everything:
