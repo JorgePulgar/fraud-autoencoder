@@ -27,7 +27,7 @@ class _Config:
     # Training
     LR: float = 1e-3
     BATCH_SIZE: int = 256
-    MAX_EPOCHS: int = 50
+    MAX_EPOCHS: int = 200
     EARLY_STOPPING_PATIENCE: int = 5
 
     # Evaluation
