@@ -191,8 +191,8 @@ def evaluate(config) -> None:
     model = Autoencoder(config.INPUT_DIM, config.HIDDEN_DIMS).to(device)
     model.load_state_dict(torch.load(config.MODELS_DIR / "autoencoder.pth", map_location=device))
 
-    errors_val  = np.log1p(compute_reconstruction_errors(model, X_val,  device))
-    errors_test = np.log1p(compute_reconstruction_errors(model, X_test, device))
+    errors_val  = compute_reconstruction_errors(model, X_val,  device)
+    errors_test = compute_reconstruction_errors(model, X_test, device)
 
     thresholds = select_threshold(errors_val, y_val)
     threshold  = thresholds["threshold_f1"]
