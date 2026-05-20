@@ -48,7 +48,7 @@
   Verify by running it from a Python REPL and printing all 7 shapes + class counts (`y_train_full.sum()`, `y_val.sum()`, `y_test.sum()`) + `scaler.mean_`.
   - Commit: `feat(data): add full data preparation pipeline`
 
-- [ ] **Task 2.5** — Add an explicit no-leakage assertion inside `prepare_data` or as a separate test: after scaling, assert that fraud examples from `X_val` and `X_test` were NOT seen during scaler fitting. (Easy way: count rows fed to the scaler and compare to `(y_train_full == 0).sum()`.)
+- [x] **Task 2.5** — Add an explicit no-leakage assertion inside `prepare_data` or as a separate test: after scaling, assert that fraud examples from `X_val` and `X_test` were NOT seen during scaler fitting. (Easy way: count rows fed to the scaler and compare to `(y_train_full == 0).sum()`.)
   - Commit: `test(data): assert no leakage in scaler fitting`
 
 - [ ] **Task 2.6** — Create `notebooks/01_eda.ipynb` with these cells (keep it tight, ~15–20 cells):
