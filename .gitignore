@@ -41,6 +41,7 @@ reports/figures/*.svg
 # Key figures committed for README / portfolio
 !reports/figures/class_distribution.png
 !reports/figures/amount_by_class.png
+!reports/figures/training_curves.png
 
 # OS
 .DS_Store
