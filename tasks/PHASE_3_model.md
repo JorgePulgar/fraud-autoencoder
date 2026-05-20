@@ -13,7 +13,7 @@
 
 ## Tasks
 
-- [ ] **Task 3.1** — In `src/model.py`, implement the `Autoencoder` class as a `torch.nn.Module`. Use the architecture defined in `CONTEXT.md`:
+- [x] **Task 3.1** — In `src/model.py`, implement the `Autoencoder` class as a `torch.nn.Module`. Use the architecture defined in `CONTEXT.md`:
   - Encoder: `Linear(30, 20) → ReLU → Linear(20, 14) → ReLU → Linear(14, 7) → ReLU`
   - Decoder: `Linear(7, 14) → ReLU → Linear(14, 20) → ReLU → Linear(20, 30)`
   - No batch norm, no dropout (keeping it ONNX-clean)
