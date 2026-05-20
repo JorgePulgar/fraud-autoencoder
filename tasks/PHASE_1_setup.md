@@ -16,7 +16,7 @@
 
 ## Tasks
 
-- [ ] **Task 1.1** — Create `.gitignore` covering Python, data, models, virtual envs, OS files, IDE files, ONNX artifacts. Verify by running `git status` after creating dummy files in `data/raw/`, `models/`, `.venv/` — none should appear as untracked.
+- [x] **Task 1.1** — Create `.gitignore` covering Python, data, models, virtual envs, OS files, IDE files, ONNX artifacts. Verify by running `git status` after creating dummy files in `data/raw/`, `models/`, `.venv/` — none should appear as untracked.
   - Commit: `chore(repo): add gitignore`
 
 - [ ] **Task 1.2** — Create folder structure: `data/raw/`, `models/`, `notebooks/`, `src/`, `reports/figures/`. Add a `.gitkeep` file inside each empty folder so they are tracked.
