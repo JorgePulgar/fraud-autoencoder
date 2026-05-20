@@ -13,7 +13,7 @@
 
 ## Tasks
 
-- [ ] **Task 2.1** — In `src/data.py`, implement `load_raw_data(path: str) -> pd.DataFrame`. It must:
+- [x] **Task 2.1** — In `src/data.py`, implement `load_raw_data(path: str) -> pd.DataFrame`. It must:
   - Load the CSV
   - Validate shape is `(284807, 31)` — raise a clear error if not
   - Validate columns include `Time`, `V1`..`V28`, `Amount`, `Class` — raise a clear error if not
