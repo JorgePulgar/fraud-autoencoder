@@ -63,7 +63,7 @@
   Verify by running all cells top-to-bottom without errors.
   - Commit: `feat(notebooks): add EDA notebook`
 
-- [ ] **Task 2.7** — Save 1–2 key EDA figures to `reports/figures/` (class_distribution.png, amount_by_class.png). These will be referenced in the final README and video.
+- [x] **Task 2.7** — Save 1–2 key EDA figures to `reports/figures/` (class_distribution.png, amount_by_class.png). These will be referenced in the final README and video.
   - Commit: `feat(reports): save EDA figures`
 
 ## Definition of done for Phase 2
