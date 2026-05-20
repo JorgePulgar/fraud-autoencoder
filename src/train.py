@@ -27,3 +27,14 @@ def train_one_epoch(
         optimizer.step()
         total_loss += loss.item() * len(batch)
     return total_loss / len(loader.dataset)
+
+
+def evaluate_loss(model: nn.Module, loader: DataLoader, device: torch.device) -> float:
+    model.eval()
+    criterion = nn.MSELoss()
+    total_loss = 0.0
+    with torch.no_grad():
+        for (batch,) in loader:
+            batch = batch.to(device)
+            total_loss += criterion(model(batch), batch).item() * len(batch)
+    return total_loss / len(loader.dataset)
