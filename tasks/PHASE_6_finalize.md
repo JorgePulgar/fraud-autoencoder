@@ -79,7 +79,7 @@
 - [x] **Task 6.5** — Clean up: delete `.venv-test/`, make sure `git status` is clean, make sure no stray debug files or `.ipynb_checkpoints/` are tracked.
   - Commit: `chore(repo): final cleanup` (only if there's something to clean — otherwise skip)
 
-- [ ] **Task 6.6** — Final review. Open the README in a markdown previewer one more time. Read it as if you were a recruiter seeing it for the first time. If anything is unclear, vague, or missing, fix it.
+- [x] **Task 6.6** — Final review. Open the README in a markdown previewer one more time. Read it as if you were a recruiter seeing it for the first time. If anything is unclear, vague, or missing, fix it.
   - Commit: `docs(readme): polish based on recruiter-perspective review` (only if changes made)
 
 ## Definition of done for Phase 6
