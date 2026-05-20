@@ -4,11 +4,13 @@ import torch
 import torch.nn as nn
 from sklearn.metrics import (
     accuracy_score,
+    average_precision_score,
     confusion_matrix,
     f1_score,
     precision_recall_curve,
     precision_score,
     recall_score,
+    roc_auc_score,
 )
 
 from src.config import Config
@@ -64,4 +66,13 @@ def compute_metrics_at_threshold(
         "fp": int(fp),
         "fn": int(fn),
         "tp": int(tp),
+    }
+
+
+def compute_threshold_independent_metrics(
+    errors: np.ndarray, y_true: np.ndarray
+) -> dict:
+    return {
+        "pr_auc": float(average_precision_score(y_true, errors)),
+        "roc_auc": float(roc_auc_score(y_true, errors)),
     }
