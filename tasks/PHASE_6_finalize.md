@@ -25,7 +25,7 @@
   Verify by running all cells top-to-bottom.
   - Commit: `feat(notebooks): add results notebook`
 
-- [ ] **Task 6.2** — Write `README.md` with these sections in order:
+- [x] **Task 6.2** — Write `README.md` with these sections in order:
   1. **Title** + one-line description
   2. **Badges** (optional: Python version, license)
   3. **Project summary** (1 paragraph): the use case, the AI engineering framing, the headline result
