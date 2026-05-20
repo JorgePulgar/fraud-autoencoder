@@ -71,7 +71,7 @@ This file is the high-level map. Each phase has its own file with detailed task 
 Update this section as you complete phases:
 
 - [x] Phase 1 — Setup
-- [ ] Phase 2 — Data
+- [x] Phase 2 — Data
 - [ ] Phase 3 — Model & Training
 - [ ] Phase 4 — Evaluation & Baselines
 - [ ] Phase 5 — ONNX Export
