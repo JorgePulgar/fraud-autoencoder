@@ -51,7 +51,7 @@
 - [x] **Task 2.5** — Add an explicit no-leakage assertion inside `prepare_data` or as a separate test: after scaling, assert that fraud examples from `X_val` and `X_test` were NOT seen during scaler fitting. (Easy way: count rows fed to the scaler and compare to `(y_train_full == 0).sum()`.)
   - Commit: `test(data): assert no leakage in scaler fitting`
 
-- [ ] **Task 2.6** — Create `notebooks/01_eda.ipynb` with these cells (keep it tight, ~15–20 cells):
+- [x] **Task 2.6** — Create `notebooks/01_eda.ipynb` with these cells (keep it tight, ~15–20 cells):
   1. Markdown: title + one-paragraph description
   2. Imports + `prepare_data` setup (but EDA should work from the raw dataframe before scaling — load it directly)
   3. Show `df.head()`, `df.shape`, `df.dtypes`
