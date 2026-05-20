@@ -37,7 +37,8 @@ def select_threshold(errors_val: np.ndarray, y_val: np.ndarray) -> dict:
 
     precision, recall, thresholds = precision_recall_curve(y_val, errors_val)
     denom = precision[:-1] + recall[:-1]
-    f1_scores = np.where(denom > 0, 2 * precision[:-1] * recall[:-1] / denom, 0.0)
+    with np.errstate(invalid="ignore", divide="ignore"):
+        f1_scores = np.where(denom > 0, 2 * precision[:-1] * recall[:-1] / denom, 0.0)
     best_idx = int(np.argmax(f1_scores))
     threshold_f1 = float(thresholds[best_idx])
 
