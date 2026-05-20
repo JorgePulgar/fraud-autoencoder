@@ -27,7 +27,7 @@ Test set evaluation (stratified 15% holdout, threshold selected on validation se
 | Isolation Forest | — | — | — | 0.1140 | 0.9479 |
 | Logistic Regression | — | — | — | 0.7928 | 0.9677 |
 
-Precision/Recall/F1 for the baselines are omitted — both are threshold-free at inference time and their PR-AUC / ROC-AUC are the fair comparison.
+Precision/Recall/F1 for the baselines are omitted — they require a separately calibrated decision threshold, which is outside their standard evaluation protocol. PR-AUC and ROC-AUC, computed from raw scores, are the fair threshold-independent comparison.
 
 ---
 
@@ -66,6 +66,8 @@ python -m src.export_onnx
 ```
 
 Scripts are runnable from the project root. All hyperparameters live in `src/config.py`. Seeds are fixed (`random_state=42`) for full reproducibility.
+
+Expected wall-clock times on CPU: `train` ~5 min (86 epochs, early stop), `evaluate` ~20 s, `export_onnx` ~3 s.
 
 ---
 
