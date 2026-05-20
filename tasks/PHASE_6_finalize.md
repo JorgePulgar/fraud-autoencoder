@@ -76,7 +76,7 @@
   Verify all three scripts run successfully end-to-end. Note the wall-clock time for each in the commit message.
   - Commit: `chore(repro): verify full pipeline runs from fresh venv`
 
-- [ ] **Task 6.5** — Clean up: delete `.venv-test/`, make sure `git status` is clean, make sure no stray debug files or `.ipynb_checkpoints/` are tracked.
+- [x] **Task 6.5** — Clean up: delete `.venv-test/`, make sure `git status` is clean, make sure no stray debug files or `.ipynb_checkpoints/` are tracked.
   - Commit: `chore(repo): final cleanup` (only if there's something to clean — otherwise skip)
 
 - [ ] **Task 6.6** — Final review. Open the README in a markdown previewer one more time. Read it as if you were a recruiter seeing it for the first time. If anything is unclear, vague, or missing, fix it.
