@@ -46,7 +46,7 @@
 - [x] **Task 3.6** — Add a `if __name__ == "__main__":` block at the bottom of `src/train.py` that calls `train(Config)`. Verify the module is runnable as `python -m src.train` from project root.
   - Commit: `feat(train): add CLI entrypoint`
 
-- [ ] **Task 3.7** — Run `python -m src.train` end-to-end. Verify:
+- [x] **Task 3.7** — Run `python -m src.train` end-to-end. Verify:
   - Training completes (either hits max epochs or triggers early stopping)
   - `models/autoencoder.pth` is created and non-empty
   - `reports/training_log.csv` exists with per-epoch losses
