@@ -38,6 +38,9 @@ models/*.json
 reports/figures/*.png
 reports/figures/*.pdf
 reports/figures/*.svg
+# Key figures committed for README / portfolio
+!reports/figures/class_distribution.png
+!reports/figures/amount_by_class.png
 
 # OS
 .DS_Store
