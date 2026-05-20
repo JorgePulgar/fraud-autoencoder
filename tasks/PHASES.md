@@ -72,7 +72,7 @@ Update this section as you complete phases:
 
 - [x] Phase 1 — Setup
 - [x] Phase 2 — Data
-- [ ] Phase 3 — Model & Training
+- [x] Phase 3 — Model & Training
 - [ ] Phase 4 — Evaluation & Baselines
 - [ ] Phase 5 — ONNX Export
 - [ ] Phase 6 — Finalize
