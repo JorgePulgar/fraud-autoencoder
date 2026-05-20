@@ -1,7 +1,10 @@
+import joblib
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+
+from src.config import Config
 
 
 _EXPECTED_SHAPE = (284807, 31)
@@ -54,3 +57,28 @@ def fit_scaler(X_train_legit: np.ndarray) -> StandardScaler:
 
 def apply_scaler(scaler: StandardScaler, X: np.ndarray) -> np.ndarray:
     return scaler.transform(X)
+
+
+def prepare_data(seed: int) -> dict:
+    df = load_raw_data(str(Config.DATA_PATH))
+    splits = split_data(df, seed)
+
+    X_train_full = splits["X_train_full"]
+    y_train_full = splits["y_train_full"]
+
+    # Fit scaler on legit training rows only — no leakage
+    X_train_legit = X_train_full[y_train_full == 0]
+    scaler = fit_scaler(X_train_legit)
+
+    Config.MODELS_DIR.mkdir(parents=True, exist_ok=True)
+    joblib.dump(scaler, Config.MODELS_DIR / "scaler.pkl")
+
+    return {
+        "X_train_full": apply_scaler(scaler, X_train_full),
+        "y_train_full": y_train_full,
+        "X_train_legit": apply_scaler(scaler, X_train_legit),
+        "X_val": apply_scaler(scaler, splits["X_val"]),
+        "y_val": splits["y_val"],
+        "X_test": apply_scaler(scaler, splits["X_test"]),
+        "y_test": splits["y_test"],
+    }
