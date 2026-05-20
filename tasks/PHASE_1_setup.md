@@ -26,10 +26,10 @@
   Note: `joblib` is pinned explicitly (not relied on as a sklearn transitive dep) because Phase 2 Task 2.4 saves the scaler via `joblib.dump`.
   - Commit: `chore(deps): pin python dependencies`
 
-- [ ] **Task 1.4** — Create `src/__init__.py` (can be empty) so `src` is importable as a module.
+- [x] **Task 1.4** — Create `src/__init__.py` (can be empty) so `src` is importable as a module.
   - Commit: `chore(src): add src package init`
 
-- [ ] **Task 1.5** — Create `src/config.py` with a single `Config` dataclass (or module-level constants) holding:
+- [x] **Task 1.5** — Create `src/config.py` with a single `Config` dataclass (or module-level constants) holding:
   - Paths: `DATA_PATH`, `MODELS_DIR`, `REPORTS_DIR`, `FIGURES_DIR`
   - Seeds: `RANDOM_SEED = 42`
   - Split ratios: `TRAIN_RATIO = 0.70`, `VAL_RATIO = 0.15`, `TEST_RATIO = 0.15`
@@ -39,7 +39,7 @@
   Verify by `python -c "from src.config import Config; print(Config)"` from project root.
   - Commit: `feat(config): add central configuration module`
 
-- [ ] **Task 1.6** — Create a tiny `src/utils.py` with a `set_seeds(seed: int)` function that seeds `random`, `numpy`, and `torch` (including `torch.cuda` and deterministic flags). Verify by importing and running it.
+- [x] **Task 1.6** — Create a tiny `src/utils.py` with a `set_seeds(seed: int)` function that seeds `random`, `numpy`, and `torch` (including `torch.cuda` and deterministic flags). Verify by importing and running it.
   - Commit: `feat(utils): add deterministic seed setter`
 
 - [ ] **Task 1.7** — Smoke test: create a temporary script `test_setup.py` at project root that imports `src.config` and `src.utils`, calls `set_seeds(42)`, and prints "OK". Run it. After it passes, delete it and do NOT commit the deletion separately — just don't add it. (If accidentally committed, remove in a `chore` commit.)
