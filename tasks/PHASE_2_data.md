@@ -36,7 +36,7 @@
   Verify by checking that `scaler.mean_` and `scaler.scale_` have length 30.
   - Commit: `feat(data): add scaler fitting and application`
 
-- [ ] **Task 2.4** — In `src/data.py`, implement a top-level `prepare_data(seed: int) -> dict` that:
+- [x] **Task 2.4** — In `src/data.py`, implement a top-level `prepare_data(seed: int) -> dict` that:
   - Calls `load_raw_data`
   - Calls `split_data`
   - Extracts `X_train_legit = X_train_full[y_train_full == 0]` (BEFORE scaling)
