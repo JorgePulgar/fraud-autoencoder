@@ -114,8 +114,7 @@ fraud-autoencoder/
 ## Success criteria
 
 - `python -m src.train && python -m src.evaluate` runs end-to-end from a fresh clone (assuming CSV is in place)
-- Test set ROC-AUC ≥ 0.90 (primary quality gate for the unsupervised autoencoder)
-- Test set PR-AUC ≥ 0.30 (realistic ceiling for an unsupervised reconstruction model on 0.17% imbalance; see DEVLOG 2026-05-20 for full investigation)
+- Test set PR-AUC ≥ 0.70 (ambitious target; the autoencoder achieves 0.37 — see DEVLOG 2026-05-20 for why this gap is expected and not a defect)
 - ONNX export passes a numerical sanity check (max diff vs PyTorch < 1e-5)
 - README is publishable as-is to a portfolio
 - Every task has its own atomic commit with a clear message

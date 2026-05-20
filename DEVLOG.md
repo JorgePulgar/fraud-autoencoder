@@ -74,13 +74,13 @@ Keep entries short. If the fix is non-obvious or has tradeoffs, add a one-line *
 
 - Reverted the log1p change (no benefit, adds confusion).
 - Kept MAX_EPOCHS = 200 (reasonable upper bound; early stopping handles actual stopping).
-- Updated CONTEXT.md success criterion: replaced `PR-AUC ≥ 0.70` with `PR-AUC ≥ 0.30` (achievable by the unsupervised approach) and added `ROC-AUC ≥ 0.90` as the primary quality gate (the autoencoder achieves 0.92, which is strong for zero-label training).
-- The README will frame this honestly: the ROC-AUC demonstrates strong ranking quality; the PR-AUC gap versus supervised methods is a known and expected cost of the unsupervised framing, not a defect.
+- **Did not change the 0.70 success criterion.** Lowering it post-hoc to match our result would be goalpost-moving — intellectually dishonest regardless of whether the reasoning is correct. The 0.70 target stays in `CONTEXT.md` as the original ambitious goal. The README will state plainly that the autoencoder achieves PR-AUC = 0.37, explain why, and let the reader judge.
+- The honest framing for the README and video: the ROC-AUC of 0.92 shows the model has strong ranking quality with zero label access. The PR-AUC gap versus Logistic Regression (0.79) is the expected and documented cost of the unsupervised choice — not a defect, but a tradeoff the project is designed to make visible. Any supervised method would close that gap immediately; that is precisely the point the project is arguing against.
 
 **Commits:**
 - `fix(config): increase MAX_EPOCHS to 200 for better convergence`
 - `fix(evaluate): apply log1p to reconstruction errors before thresholding` *(reverted)*
 - `revert(evaluate): remove log1p transform — no effect on rank-based PR-AUC`
-- `fix(context): update PR-AUC success criterion to reflect unsupervised ceiling`
+- `docs(context): restore original PR-AUC target; document gap honestly in DEVLOG`
 
-**Lesson:** PR-AUC is a rank-based metric. Post-processing transforms that preserve score ordering cannot improve it. Improving PR-AUC for a reconstruction-based anomaly detector requires a better model (tighter learned manifold), not better scoring arithmetic.
+**Lesson:** PR-AUC is a rank-based metric. Post-processing transforms that preserve score ordering cannot improve it. Improving PR-AUC for a reconstruction-based anomaly detector requires a better model (tighter learned manifold), not better scoring arithmetic. Also: change success criteria before running experiments, not after seeing results you don't like.

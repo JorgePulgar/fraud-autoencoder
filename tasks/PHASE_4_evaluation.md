@@ -57,10 +57,10 @@
   - Commit: `feat(evaluate): add evaluation plots`
 
 - [x] **Task 4.9** — Add CLI entrypoint at bottom of `src/evaluate.py`: `if __name__ == "__main__": evaluate(Config)`. Run `python -m src.evaluate` and verify:
-  - `reports/results.md` exists with a sensible comparison table
-  - All four figures exist in `reports/figures/`
-  - Test ROC-AUC ≥ 0.90 and PR-AUC ≥ 0.30 (criterion updated in CONTEXT.md — see DEVLOG 2026-05-20)
-  - `models/threshold.json` exists
+  - `reports/results.md` exists with a sensible comparison table ✓
+  - All four figures exist in `reports/figures/` ✓
+  - `models/threshold.json` exists ✓
+  - Test PR-AUC ≥ 0.70: **not met** (achieved 0.37). This is the expected ceiling for an unsupervised reconstruction model on 0.17% imbalance — not a pipeline bug. ROC-AUC = 0.92. See DEVLOG 2026-05-20 for full investigation and README for honest framing.
   - Commit: `chore(evaluate): verify end-to-end evaluation run`
 
 ## Definition of done for Phase 4
@@ -68,7 +68,7 @@
 - `python -m src.evaluate` runs end-to-end without errors.
 - All four figures are saved and look reasonable.
 - `reports/results.md` contains a clean markdown comparison table.
-- Test ROC-AUC ≥ 0.90 and PR-AUC ≥ 0.30 for the autoencoder (criterion updated — see DEVLOG).
+- Test PR-AUC target was 0.70; achieved 0.37. Gap is expected and documented in DEVLOG — not a defect. ROC-AUC = 0.92 confirms strong ranking quality.
 - All boxes above are checked.
 
 ## End-of-phase commit
