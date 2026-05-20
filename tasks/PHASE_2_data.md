@@ -29,7 +29,7 @@
   Verify by printing shapes and confirming fraud appears in val and test (`y_val.sum() > 0`, `y_test.sum() > 0`).
   - Commit: `feat(data): add stratified train/val/test split`
 
-- [ ] **Task 2.3** — In `src/data.py`, implement `fit_scaler(X_train_legit: np.ndarray) -> StandardScaler`. It must:
+- [x] **Task 2.3** — In `src/data.py`, implement `fit_scaler(X_train_legit: np.ndarray) -> StandardScaler`. It must:
   - Fit a `StandardScaler` on the input (which is the legit-only training subset)
   - Return the fitted scaler
   And implement `apply_scaler(scaler, X) -> np.ndarray` that transforms any array.
