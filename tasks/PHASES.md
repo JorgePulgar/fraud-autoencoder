@@ -70,7 +70,7 @@ This file is the high-level map. Each phase has its own file with detailed task 
 
 Update this section as you complete phases:
 
-- [ ] Phase 1 — Setup
+- [x] Phase 1 — Setup
 - [ ] Phase 2 — Data
 - [ ] Phase 3 — Model & Training
 - [ ] Phase 4 — Evaluation & Baselines
