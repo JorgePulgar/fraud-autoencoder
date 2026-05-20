@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 
 
 _EXPECTED_SHAPE = (284807, 31)
@@ -43,3 +44,13 @@ def split_data(df: pd.DataFrame, seed: int) -> dict:
         "X_test": X_test,
         "y_test": y_test,
     }
+
+
+def fit_scaler(X_train_legit: np.ndarray) -> StandardScaler:
+    scaler = StandardScaler()
+    scaler.fit(X_train_legit)
+    return scaler
+
+
+def apply_scaler(scaler: StandardScaler, X: np.ndarray) -> np.ndarray:
+    return scaler.transform(X)
