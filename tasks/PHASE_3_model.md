@@ -30,7 +30,7 @@
 - [x] **Task 3.4** — In `src/train.py`, implement `evaluate_loss(model, loader, device) -> float` that runs in `torch.no_grad()` and returns average MSE over the loader.
   - Commit: `feat(train): add validation loss evaluation`
 
-- [ ] **Task 3.5** — In `src/train.py`, implement the main `train(config) -> None` function that orchestrates everything:
+- [x] **Task 3.5** — In `src/train.py`, implement the main `train(config) -> None` function that orchestrates everything:
   1. Call `set_seeds(config.RANDOM_SEED)`
   2. Call `prepare_data(config.RANDOM_SEED)`
   3. Build legit-only val loader: `X_val_legit = X_val[y_val == 0]`
