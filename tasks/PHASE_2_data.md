@@ -21,7 +21,7 @@
   Verify with a small script that loads the data and prints shape + class counts.
   - Commit: `feat(data): add raw data loader with validation`
 
-- [ ] **Task 2.2** — In `src/data.py`, implement `split_data(df: pd.DataFrame, seed: int) -> dict` that returns a dict with keys `X_train_full`, `y_train_full`, `X_val`, `y_val`, `X_test`, `y_test`. It must:
+- [x] **Task 2.2** — In `src/data.py`, implement `split_data(df: pd.DataFrame, seed: int) -> dict` that returns a dict with keys `X_train_full`, `y_train_full`, `X_val`, `y_val`, `X_test`, `y_test`. It must:
   - Drop `Class` from features
   - Use `sklearn.model_selection.train_test_split` with `stratify=y` twice to achieve 70/15/15 split
   - Use `random_state=seed`
