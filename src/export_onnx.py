@@ -24,6 +24,7 @@ def export_to_onnx(
         output_names=["output"],
         dynamic_axes={"input": {0: "batch_size"}, "output": {0: "batch_size"}},
         opset_version=17,
+        dynamo=False,
     )
     print(f"ONNX model saved to {output_path}")
 
@@ -49,3 +50,8 @@ def verify_onnx_export(
     print(f"Max absolute difference (PyTorch vs ONNX): {max_diff:.2e}")
     assert max_diff < 1e-5, f"Numerical mismatch: {max_diff:.2e} >= 1e-5"
     print("Verification passed.")
+
+
+if __name__ == "__main__":
+    export_to_onnx()
+    verify_onnx_export()
