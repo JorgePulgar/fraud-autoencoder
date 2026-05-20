@@ -2,7 +2,14 @@ import json
 import numpy as np
 import torch
 import torch.nn as nn
-from sklearn.metrics import f1_score, precision_recall_curve
+from sklearn.metrics import (
+    accuracy_score,
+    confusion_matrix,
+    f1_score,
+    precision_recall_curve,
+    precision_score,
+    recall_score,
+)
 
 from src.config import Config
 
@@ -41,3 +48,20 @@ def select_threshold(errors_val: np.ndarray, y_val: np.ndarray) -> dict:
         json.dump(result, fh, indent=2)
 
     return result
+
+
+def compute_metrics_at_threshold(
+    errors: np.ndarray, y_true: np.ndarray, threshold: float
+) -> dict:
+    y_pred = (errors >= threshold).astype(int)
+    tn, fp, fn, tp = confusion_matrix(y_true, y_pred, labels=[0, 1]).ravel()
+    return {
+        "precision": float(precision_score(y_true, y_pred, zero_division=0)),
+        "recall": float(recall_score(y_true, y_pred, zero_division=0)),
+        "f1": float(f1_score(y_true, y_pred, zero_division=0)),
+        "accuracy": float(accuracy_score(y_true, y_pred)),
+        "tn": int(tn),
+        "fp": int(fp),
+        "fn": int(fn),
+        "tp": int(tp),
+    }
