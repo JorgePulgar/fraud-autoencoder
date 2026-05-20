@@ -75,4 +75,4 @@ Update this section as you complete phases:
 - [x] Phase 3 — Model & Training
 - [x] Phase 4 — Evaluation & Baselines
 - [x] Phase 5 — ONNX Export
-- [ ] Phase 6 — Finalize
+- [x] Phase 6 — Finalize
