@@ -116,3 +116,8 @@ def train(config) -> None:
     plt.close(fig)
 
     print(f"\nBest epoch: {best_epoch} | Best val loss: {best_val_loss:.6f}")
+
+
+if __name__ == "__main__":
+    from src.config import Config
+    train(Config)
