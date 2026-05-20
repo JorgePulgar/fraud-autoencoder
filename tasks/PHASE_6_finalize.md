@@ -66,7 +66,7 @@
 - [x] **Task 6.3** — Add a `LICENSE` file (MIT).
   - Commit: `docs(license): add MIT license`
 
-- [ ] **Task 6.4** — Final reproducibility dry-run. In a fresh terminal:
+- [x] **Task 6.4** — Final reproducibility dry-run. In a fresh terminal:
   1. Create a brand-new venv: `python -m venv .venv-test`
   2. Activate it
   3. `pip install -r requirements.txt`
