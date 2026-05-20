@@ -1,5 +1,10 @@
 import json
+import pathlib
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
 import numpy as np
+import seaborn as sns
 import torch
 import torch.nn as nn
 from sklearn.metrics import (
@@ -77,6 +82,93 @@ def compute_threshold_independent_metrics(
         "pr_auc": float(average_precision_score(y_true, errors)),
         "roc_auc": float(roc_auc_score(y_true, errors)),
     }
+
+
+def plot_error_distribution(
+    errors_test: np.ndarray,
+    y_test: np.ndarray,
+    threshold: float,
+    save_path: pathlib.Path,
+) -> None:
+    fig, ax = plt.subplots(figsize=(8, 4))
+    ax.hist(errors_test[y_test == 0], bins=100, alpha=0.6, label="Legit", color="steelblue")
+    ax.hist(errors_test[y_test == 1], bins=100, alpha=0.6, label="Fraud", color="tomato")
+    ax.axvline(threshold, color="black", linestyle="--", label=f"Threshold={threshold:.4f}")
+    ax.set_yscale("log")
+    ax.set_xlabel("Reconstruction Error (MSE)")
+    ax.set_ylabel("Count (log scale)")
+    ax.set_title("Reconstruction Error Distribution by Class")
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(save_path, dpi=100)
+    plt.close(fig)
+
+
+def plot_pr_curve(
+    scores_dict: dict,
+    y_test: np.ndarray,
+    save_path: pathlib.Path,
+) -> None:
+    from sklearn.metrics import precision_recall_curve, average_precision_score
+
+    fig, ax = plt.subplots(figsize=(7, 5))
+    for name, scores in scores_dict.items():
+        p, r, _ = precision_recall_curve(y_test, scores)
+        ap = average_precision_score(y_test, scores)
+        ax.plot(r, p, label=f"{name} (AP={ap:.3f})")
+    ax.set_xlabel("Recall")
+    ax.set_ylabel("Precision")
+    ax.set_title("Precision-Recall Curves")
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(save_path, dpi=100)
+    plt.close(fig)
+
+
+def plot_roc_curve(
+    scores_dict: dict,
+    y_test: np.ndarray,
+    save_path: pathlib.Path,
+) -> None:
+    from sklearn.metrics import roc_curve, roc_auc_score
+
+    fig, ax = plt.subplots(figsize=(7, 5))
+    for name, scores in scores_dict.items():
+        fpr, tpr, _ = roc_curve(y_test, scores)
+        auc = roc_auc_score(y_test, scores)
+        ax.plot(fpr, tpr, label=f"{name} (AUC={auc:.3f})")
+    ax.plot([0, 1], [0, 1], "k--", label="Random")
+    ax.set_xlabel("False Positive Rate")
+    ax.set_ylabel("True Positive Rate")
+    ax.set_title("ROC Curves")
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(save_path, dpi=100)
+    plt.close(fig)
+
+
+def plot_confusion_matrix(
+    metrics_dict: dict,
+    save_path: pathlib.Path,
+) -> None:
+    cm = np.array([
+        [metrics_dict["tn"], metrics_dict["fp"]],
+        [metrics_dict["fn"], metrics_dict["tp"]],
+    ])
+    fig, ax = plt.subplots(figsize=(5, 4))
+    sns.heatmap(
+        cm,
+        annot=True,
+        fmt="d",
+        cmap="Blues",
+        xticklabels=["Pred Legit", "Pred Fraud"],
+        yticklabels=["True Legit", "True Fraud"],
+        ax=ax,
+    )
+    ax.set_title("Confusion Matrix — Autoencoder (F1-opt threshold)")
+    fig.tight_layout()
+    fig.savefig(save_path, dpi=100)
+    plt.close(fig)
 
 
 def evaluate(config) -> None:
