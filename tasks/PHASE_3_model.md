@@ -21,7 +21,7 @@
   Verify with a dummy forward pass: `Autoencoder()(torch.randn(4, 30)).shape == (4, 30)`.
   - Commit: `feat(model): implement symmetric autoencoder`
 
-- [ ] **Task 3.2** — In `src/train.py`, implement `make_dataloader(X: np.ndarray, batch_size: int, shuffle: bool) -> DataLoader` that wraps a numpy array into a `TensorDataset` + `DataLoader`. Use `torch.float32`.
+- [x] **Task 3.2** — In `src/train.py`, implement `make_dataloader(X: np.ndarray, batch_size: int, shuffle: bool) -> DataLoader` that wraps a numpy array into a `TensorDataset` + `DataLoader`. Use `torch.float32`.
   - Commit: `feat(train): add dataloader helper`
 
 - [ ] **Task 3.3** — In `src/train.py`, implement the `train_one_epoch(model, loader, optimizer, device) -> float` function that runs one epoch and returns the average training loss.
