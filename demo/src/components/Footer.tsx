@@ -1,4 +1,4 @@
-const GITHUB_USER = 'jpulgar111'
+const GITHUB_USER = 'JorgePulgar'
 const REPO = `https://github.com/${GITHUB_USER}/fraud-autoencoder`
 
 export default function Footer() {

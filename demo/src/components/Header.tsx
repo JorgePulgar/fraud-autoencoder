@@ -18,7 +18,7 @@ export default function Header() {
           No data leaves your device
         </span>
         <a
-          href="https://github.com/jpulgar111/fraud-autoencoder"
+          href="https://github.com/JorgePulgar/fraud-autoencoder"
           target="_blank"
           rel="noopener noreferrer"
           className="text-xs font-mono text-muted-foreground hover:text-foreground transition-colors"
