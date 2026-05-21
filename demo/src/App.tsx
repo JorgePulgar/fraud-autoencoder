@@ -141,6 +141,11 @@ export default function App() {
               </div>
             </div>
 
+            {/* Threshold slider */}
+            <div className="rounded-lg border border-border bg-card p-6">
+              <ThresholdSlider histogramData={histogramData} threshold={threshold} />
+            </div>
+
             {/* Verdict + feature chart */}
             {lastPrediction && (
               <VerdictCard prediction={lastPrediction} />
@@ -150,11 +155,6 @@ export default function App() {
                 <FeatureBarChart perFeatureError={lastPrediction.perFeatureError} />
               </div>
             )}
-
-            {/* Threshold slider */}
-            <div className="rounded-lg border border-border bg-card p-6">
-              <ThresholdSlider histogramData={histogramData} threshold={threshold} />
-            </div>
 
             {/* Histogram */}
             <div className="rounded-lg border border-border bg-card p-6">
