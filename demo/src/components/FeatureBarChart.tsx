@@ -64,7 +64,7 @@ export default function FeatureBarChart({ perFeatureError }: Props) {
                 fontFamily: 'Geist Mono, monospace',
                 fontSize: 12,
               }}
-              formatter={(value: number) => [value.toFixed(6), 'sq. error']}
+              formatter={(value) => [typeof value === 'number' ? value.toFixed(6) : value, 'sq. error']}
             />
             <Bar dataKey="value" radius={[2, 2, 0, 0]}>
               {data.map((entry, index) => (

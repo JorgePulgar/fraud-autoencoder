@@ -28,7 +28,7 @@ function buildBins(samples: HistogramSample[], min: number, max: number): BinDat
   }))
   for (const s of samples) {
     const idx = Math.min(Math.floor((s.error - min) / width), BINS - 1)
-    if (s.label === 0) bins[idx].legit++ else bins[idx].fraud++
+    if (s.label === 0) { bins[idx].legit++ } else { bins[idx].fraud++ }
   }
   return bins
 }
@@ -79,8 +79,8 @@ export default function ErrorHistogram({ histogramData }: Props) {
           />
           <Tooltip
             contentStyle={{ background: '#18181b', border: '1px solid #3f3f46', fontFamily: 'Geist Mono, monospace', fontSize: 11 }}
-            labelFormatter={(v: number) => `Error ≈ ${Number(v).toFixed(3)}`}
-            formatter={(val: number, name: string) => [val, name === 'legit' ? 'Legit' : 'Fraud']}
+            labelFormatter={(v) => `Error ≈ ${Number(v).toFixed(3)}`}
+            formatter={(val, name) => [val, name === 'legit' ? 'Legit' : 'Fraud']}
           />
           <Bar dataKey="legit" stackId="a" fill="#10b981" fillOpacity={0.7} isAnimationActive={false} />
           <Bar dataKey="fraud" stackId="a" fill="#ef4444" fillOpacity={0.8} isAnimationActive={false} />

@@ -1,5 +1,6 @@
 import * as ort from 'onnxruntime-web'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { Toaster } from '@/components/ui/sonner'
 import { useModel } from '@/hooks/useModel'
 import { useLatency } from '@/hooks/useLatency'
 import { useDemoStore } from '@/store'
@@ -8,6 +9,10 @@ import PresetRunner from '@/components/PresetRunner'
 import ManualInputForm from '@/components/ManualInputForm'
 import VerdictCard from '@/components/VerdictCard'
 import FeatureBarChart from '@/components/FeatureBarChart'
+import ThresholdSlider from '@/components/ThresholdSlider'
+import ErrorHistogram from '@/components/ErrorHistogram'
+import CSVUpload, { type ParsedRow } from '@/components/CSVUpload'
+import BatchResults from '@/components/BatchResults'
 import LatencyCounter from '@/components/LatencyCounter'
 import './index.css'
 
@@ -40,18 +45,20 @@ function ErrorCard({ message }: { message: string }) {
 }
 
 export default function App() {
-  const { status, session, scaler, threshold, presets, error: loadError } = useModel()
+  const { status, session, scaler, threshold, presets, histogramData, error: loadError } = useModel()
   const { last, avg, count, record } = useLatency()
   const { lastPrediction, setThreshold } = useDemoStore()
+  const [csvRows, setCsvRows] = useState<ParsedRow[]>([])
 
   useEffect(() => {
     if (threshold) setThreshold(threshold.threshold_f1)
   }, [threshold, setThreshold])
 
-  const isReady = status === 'ready' && session && scaler && threshold && presets
+  const isReady = status === 'ready' && session && scaler && threshold && presets && histogramData
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
+      <Toaster />
       <Header />
 
       <main className="flex-1 p-6 max-w-7xl mx-auto w-full space-y-6">
@@ -65,7 +72,7 @@ export default function App() {
 
         {isReady && (
           <>
-            {/* Top section: presets + manual form side by side on desktop */}
+            {/* Presets + manual form side by side */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="rounded-lg border border-border bg-card p-6">
                 <PresetRunner
@@ -86,20 +93,37 @@ export default function App() {
               </div>
             </div>
 
-            {/* Verdict card — full width, only when populated */}
+            {/* Verdict + feature chart */}
             {lastPrediction && (
               <VerdictCard prediction={lastPrediction} />
             )}
-
-            {/* Per-feature bar chart — full width, only when populated */}
             {lastPrediction && (
-              <FeatureBarChart perFeatureError={lastPrediction.perFeatureError} />
+              <div className="rounded-lg border border-border bg-card p-6">
+                <FeatureBarChart perFeatureError={lastPrediction.perFeatureError} />
+              </div>
             )}
+
+            {/* Threshold slider */}
+            <div className="rounded-lg border border-border bg-card p-6">
+              <ThresholdSlider histogramData={histogramData} threshold={threshold} />
+            </div>
+
+            {/* Histogram */}
+            <div className="rounded-lg border border-border bg-card p-6">
+              <ErrorHistogram histogramData={histogramData} />
+            </div>
+
+            {/* CSV upload + batch results */}
+            <div className="rounded-lg border border-border bg-card p-6 space-y-6">
+              <CSVUpload onRows={setCsvRows} />
+              {csvRows.length > 0 && (
+                <BatchResults session={session} scaler={scaler} rows={csvRows} />
+              )}
+            </div>
           </>
         )}
       </main>
 
-      {/* Latency counter pinned to bottom-right */}
       {last !== null && (
         <div className="fixed bottom-4 right-4 rounded-lg border border-border bg-card/90 backdrop-blur px-3 py-2">
           <LatencyCounter last={last} avg={avg} count={count} />
