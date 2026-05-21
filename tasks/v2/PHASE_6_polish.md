@@ -34,7 +34,7 @@
 - [x] **Task 6.7** — Mobile breakpoint pass. At `< 768px`: PresetRunner and ManualInputForm stack vertically; the threshold slider is replaced by a number input with min/max/step; charts stack and shrink to viewport width; the manual input form's 30 fields move into a shadcn `Accordion` to avoid an overwhelming wall. Verify in Chrome DevTools mobile viewport (iPhone 12, Pixel 5): every interactive element is reachable and readable.
   - Commit: `feat(ui): responsive layout for mobile breakpoint`
 
-- [ ] **Task 6.8** — Typography and spacing pass. Audit headings (h1 → h3 hierarchy), padding consistency between sections (use a 4/8/16/24/32 px scale), color contrast (zinc-50 on zinc-950 base, zinc-400 for muted), hover states on every interactive element. Verify by walking through the page and noting any inconsistency; fix until none remain.
+- [x] **Task 6.8** — Typography and spacing pass. Audit headings (h1 → h3 hierarchy), padding consistency between sections (use a 4/8/16/24/32 px scale), color contrast (zinc-50 on zinc-950 base, zinc-400 for muted), hover states on every interactive element. Verify by walking through the page and noting any inconsistency; fix until none remain.
   - Commit: `style(demo): final typography and spacing pass`
 
 ## Definition of done for Phase 6
