@@ -22,7 +22,7 @@
 - [x] **Task 6.3** — Build `src/components/WhyPRAUCPopover.tsx`: a shadcn `Popover` triggered by a help icon next to the histogram. Body explains in 3–4 short sentences why supervised methods would beat the autoencoder on raw F1, and why the autoencoder framing is still the right one. Mirror the language from v1 README's "Why an autoencoder" section. Verify: clicking the icon opens the popover; clicking outside closes it.
   - Commit: `feat(ui): add 'why PR-AUC 0.37' popover`
 
-- [ ] **Task 6.4** — Build `src/components/Footer.tsx`: short Spanish blurb (3–5 lines summarizing the project), links to v1 README, v1 DEVLOG, MIT license, and the author's contact (GitHub + email placeholder). Verify visually that Spanish text is correct and links resolve.
+- [x] **Task 6.4** — Build `src/components/Footer.tsx`: short Spanish blurb (3–5 lines summarizing the project), links to v1 README, v1 DEVLOG, MIT license, and the author's contact (GitHub + email placeholder). Verify visually that Spanish text is correct and links resolve.
   - Commit: `feat(ui): add footer with spanish blurb and links`
 
 - [ ] **Task 6.5** — Replace ad-hoc loading states with shadcn `Skeleton` placeholders. Before `useModel()` resolves: skeleton for the preset cards, manual form, histogram, and bar chart. After resolution, fade in real content. Verify by throttling network in dev tools to "Slow 3G" — skeletons appear, then the real UI.
