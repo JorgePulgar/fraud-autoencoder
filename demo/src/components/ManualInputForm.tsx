@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import type * as ort from 'onnxruntime-web'
 import { Slider } from '@/components/ui/slider'
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion'
 import { featuresToVector, applyScaler } from '@/lib/scaler'
 import { runInference } from '@/lib/inference'
 import { reconstructionError } from '@/lib/errors'
@@ -96,8 +97,8 @@ export default function ManualInputForm({ session, scaler, defaultRaw, onInfer }
         ))}
       </div>
 
-      {/* V1–V28 sliders */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-3">
+      {/* V1–V28 sliders — desktop: plain grid, mobile: Accordion to avoid wall-of-sliders */}
+      <div className="hidden md:grid grid-cols-4 gap-x-4 gap-y-3">
         {V_NAMES.map((name) => {
           const key = name as typeof ALL_FEATURES[number]
           const b = BOUNDS[name]
@@ -126,6 +127,43 @@ export default function ManualInputForm({ session, scaler, defaultRaw, onInfer }
           )
         })}
       </div>
+
+      <Accordion type="single" collapsible className="md:hidden">
+        <AccordionItem value="v-fields">
+          <AccordionTrigger>V1–V28 PCA features (28 fields)</AccordionTrigger>
+          <AccordionContent>
+            <div className="grid grid-cols-2 gap-x-4 gap-y-3">
+              {V_NAMES.map((name) => {
+                const key = name as typeof ALL_FEATURES[number]
+                const b = BOUNDS[name]
+                return (
+                  <div key={name} className="space-y-1">
+                    <label className="font-mono text-xs text-muted-foreground flex justify-between">
+                      <span>{name}</span>
+                      <span className="text-foreground tabular-nums">
+                        {(values[key] ?? 0).toFixed(2)}
+                      </span>
+                    </label>
+                    <Controller
+                      control={control}
+                      name={key}
+                      render={({ field }) => (
+                        <Slider
+                          min={b.min}
+                          max={b.max}
+                          step={b.step}
+                          value={[field.value]}
+                          onValueChange={([v]) => field.onChange(v)}
+                        />
+                      )}
+                    />
+                  </div>
+                )
+              })}
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
 
       <button
         type="submit"

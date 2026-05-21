@@ -131,7 +131,7 @@ export default function App() {
                 />
               </div>
 
-              <div className="rounded-lg border border-border bg-card p-6 overflow-y-auto max-h-[640px]">
+              <div className="rounded-lg border border-border bg-card p-6 lg:overflow-y-auto lg:max-h-[640px]">
                 <ManualInputForm
                   session={session}
                   scaler={scaler}

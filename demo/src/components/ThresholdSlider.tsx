@@ -36,17 +36,40 @@ export default function ThresholdSlider({ histogramData, threshold }: Props) {
           </button>
         </div>
       </div>
-      <Slider
-        min={min}
-        max={max}
-        step={(max - min) / 1000}
-        value={[current]}
-        onValueChange={([v]) => setThreshold(v)}
-        className="w-full"
-      />
-      <div className="flex justify-between font-mono text-xs text-muted-foreground">
-        <span>{min.toFixed(3)}</span>
-        <span>{max.toFixed(3)}</span>
+      {/* Desktop: interactive slider */}
+      <div className="hidden md:block space-y-2">
+        <Slider
+          min={min}
+          max={max}
+          step={(max - min) / 1000}
+          value={[current]}
+          onValueChange={([v]) => setThreshold(v)}
+          className="w-full"
+        />
+        <div className="flex justify-between font-mono text-xs text-muted-foreground">
+          <span>{min.toFixed(3)}</span>
+          <span>{max.toFixed(3)}</span>
+        </div>
+      </div>
+
+      {/* Mobile: number input */}
+      <div className="md:hidden">
+        <input
+          type="number"
+          min={min}
+          max={max}
+          step={(max - min) / 1000}
+          value={current}
+          onChange={(e) => {
+            const v = parseFloat(e.target.value)
+            if (!isNaN(v)) setThreshold(Math.max(min, Math.min(max, v)))
+          }}
+          className="w-full rounded border border-border bg-background px-3 py-2 font-mono text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-violet-500"
+        />
+        <div className="flex justify-between font-mono text-xs text-muted-foreground mt-1">
+          <span>min {min.toFixed(3)}</span>
+          <span>max {max.toFixed(3)}</span>
+        </div>
       </div>
     </div>
   )
