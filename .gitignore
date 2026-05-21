@@ -59,3 +59,7 @@ desktop.ini
 .pytest_cache/
 .coverage
 htmlcov/
+
+# v2 demo artifacts (must ship)
+!demo/public/autoencoder.onnx
+!demo/public/*.json
