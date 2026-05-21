@@ -13,7 +13,7 @@
 
 ## Tasks
 
-- [ ] **Task 6.1** — Write final English copy. Update the header subtitle, page intro, section labels, button labels, and form helper text to remove placeholder strings and marketing language. Tone matches v1's README: professional, direct, technically honest. Verify by reading every visible string aloud — none should sound salesy or vague.
+- [x] **Task 6.1** — Write final English copy. Update the header subtitle, page intro, section labels, button labels, and form helper text to remove placeholder strings and marketing language. Tone matches v1's README: professional, direct, technically honest. Verify by reading every visible string aloud — none should sound salesy or vague.
   - Commit: `docs(demo): final english copy pass`
 
 - [ ] **Task 6.2** — Add the always-visible disclaimer banner near the header: "Portfolio project on public Kaggle data. Not a production fraud system." Use a muted shadcn `Alert` with no dismiss button. Verify: visible on first paint.
