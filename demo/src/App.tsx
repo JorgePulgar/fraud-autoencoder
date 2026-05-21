@@ -7,6 +7,7 @@ import { useDemoStore } from '@/store'
 import Header from '@/components/Header'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import Footer from '@/components/Footer'
+import ModelErrorCard from '@/components/ModelErrorCard'
 import PresetRunner from '@/components/PresetRunner'
 import ManualInputForm from '@/components/ManualInputForm'
 import VerdictCard from '@/components/VerdictCard'
@@ -86,20 +87,6 @@ function LoadingSkeleton() {
   )
 }
 
-function ErrorCard({ message }: { message: string }) {
-  return (
-    <div className="rounded-lg border border-red-800 bg-red-950/30 p-6">
-      <p className="font-mono text-sm text-red-400">Failed to load model</p>
-      <p className="font-mono text-xs text-muted-foreground mt-2">{message}</p>
-      <button
-        onClick={() => window.location.reload()}
-        className="mt-4 rounded px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 font-mono text-xs text-foreground transition-colors"
-      >
-        Reload
-      </button>
-    </div>
-  )
-}
 
 export default function App() {
   const { status, session, scaler, threshold, presets, histogramData, error: loadError } = useModel()
@@ -128,7 +115,7 @@ export default function App() {
         {status === 'loading' && <LoadingSkeleton />}
 
         {status === 'error' && loadError && (
-          <ErrorCard message={loadError} />
+          <ModelErrorCard message={loadError} />
         )}
 
         {isReady && (
