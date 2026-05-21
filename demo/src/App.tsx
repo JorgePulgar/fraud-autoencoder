@@ -5,6 +5,7 @@ import { useModel } from '@/hooks/useModel'
 import { useLatency } from '@/hooks/useLatency'
 import { useDemoStore } from '@/store'
 import Header from '@/components/Header'
+import { Alert, AlertDescription } from '@/components/ui/alert'
 import PresetRunner from '@/components/PresetRunner'
 import ManualInputForm from '@/components/ManualInputForm'
 import VerdictCard from '@/components/VerdictCard'
@@ -60,6 +61,12 @@ export default function App() {
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <Toaster />
       <Header />
+
+      <Alert variant="muted" className="rounded-none border-x-0 border-t-0 text-center font-mono text-xs py-2">
+        <AlertDescription>
+          Portfolio project on public Kaggle data. Not a production fraud system.
+        </AlertDescription>
+      </Alert>
 
       <main className="flex-1 p-6 max-w-7xl mx-auto w-full space-y-6">
         {status === 'loading' && (
