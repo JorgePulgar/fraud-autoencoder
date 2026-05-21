@@ -25,7 +25,7 @@
   Verify by creating a dummy `demo/public/test.json` and running `git status`: it must appear as untracked. Delete the dummy before committing.
   - Commit: `chore(gitignore): allow demo/public artifacts to be tracked`
 
-- [ ] **Task 1.3** — Create `src/export_demo_assets.py` skeleton: argparse with `--out` (default `demo/public/`), loads `models/scaler.pkl`, `models/threshold.json`, the test split (reuse `src.data.load_and_split`), and the autoencoder via `torch.load`. Logs what it loaded. Verify by `python -m src.export_demo_assets --help` and `python -m src.export_demo_assets` printing the loaded shapes without writing files yet.
+- [x] **Task 1.3** — Create `src/export_demo_assets.py` skeleton: argparse with `--out` (default `demo/public/`), loads `models/scaler.pkl`, `models/threshold.json`, the test split (reuse `src.data.load_and_split`), and the autoencoder via `torch.load`. Logs what it loaded. Verify by `python -m src.export_demo_assets --help` and `python -m src.export_demo_assets` printing the loaded shapes without writing files yet.
   - Commit: `feat(export): scaffold demo asset export script`
 
 - [ ] **Task 1.4** — Implement the `scaler.json` writer. Read `scaler.pkl`, write `{"mean": [...], "scale": [...], "feature_order": ["Time", "V1", ..., "V28", "Amount"]}` to `demo/public/scaler.json`. Verify: load the JSON back, apply `(row - mean) / scale` to a known test row, compare to `scaler.transform(row)` from sklearn — diff must be 0 (or `< 1e-10`).
