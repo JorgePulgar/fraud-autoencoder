@@ -40,7 +40,7 @@
 - [x] **Task 1.7** — Build `histogram-data.json`. For the full test set, compute AE reconstruction errors. Take all 90+ frauds and a deterministic random sample of 500 legit rows (`random_state=42`). Write `{"samples": [{"error": float, "label": 0|1}, ...]}` to `demo/public/histogram-data.json`. Verify: file exists, `len(samples) == n_fraud_in_test + 500`, both labels present, errors are all positive floats.
   - Commit: `feat(export): write histogram-data.json for chart`
 
-- [ ] **Task 1.8** — Add a `--verify` flag to `src/export_demo_assets.py` that runs all the above verifications inline (re-reads each emitted JSON, sanity-checks shapes/values, re-runs the scaler comparison, re-runs an ONNX forward pass). Verify by `python -m src.export_demo_assets --verify` printing `OK` for each artifact.
+- [x] **Task 1.8** — Add a `--verify` flag to `src/export_demo_assets.py` that runs all the above verifications inline (re-reads each emitted JSON, sanity-checks shapes/values, re-runs the scaler comparison, re-runs an ONNX forward pass). Verify by `python -m src.export_demo_assets --verify` printing `OK` for each artifact.
   - Commit: `feat(export): add --verify flag for end-to-end sanity check`
 
 ## Definition of done for Phase 1
