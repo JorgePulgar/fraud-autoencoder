@@ -103,6 +103,36 @@ def _write_presets_json(
     print(f"  wrote presets.json (6 rows: {labels.count(0)} legit, {labels.count(1)} fraud)")
 
 
+def _write_histogram_json(
+    out_dir: Path,
+    scaler,
+    session,
+    X_test_raw: np.ndarray,
+    y_test: np.ndarray,
+) -> None:
+    X_scaled = scaler.transform(X_test_raw)
+
+    fraud_mask = y_test == 1
+    legit_mask = y_test == 0
+
+    # All frauds
+    X_fraud = X_scaled[fraud_mask]
+    fraud_errors = _ae_errors(session, X_fraud)
+
+    # Deterministic sample of 500 legit rows
+    rng = np.random.default_rng(42)
+    legit_indices = np.where(legit_mask)[0]
+    sampled = rng.choice(legit_indices, size=500, replace=False)
+    legit_errors = _ae_errors(session, X_scaled[sampled])
+
+    samples = (
+        [{"error": float(e), "label": 1} for e in fraud_errors]
+        + [{"error": float(e), "label": 0} for e in legit_errors]
+    )
+    (out_dir / "histogram-data.json").write_text(json.dumps({"samples": samples}))
+    print(f"  wrote histogram-data.json ({fraud_mask.sum()} fraud + 500 legit = {len(samples)} samples)")
+
+
 def main(out_dir: Path, verify: bool = False) -> None:
     print("Loading v1 artifacts...")
     scaler, threshold, session = _load_artifacts()
@@ -125,6 +155,7 @@ def main(out_dir: Path, verify: bool = False) -> None:
     _write_scaler_json(out_dir, scaler)
     _copy_threshold_and_onnx(out_dir)
     _write_presets_json(out_dir, scaler, session, X_test, y_test, X_train_full, y_train_full)
+    _write_histogram_json(out_dir, scaler, session, X_test, y_test)
 
     if verify:
         _run_verify(out_dir, scaler, threshold, session)
