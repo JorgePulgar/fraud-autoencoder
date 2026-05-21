@@ -66,7 +66,6 @@ Built with React + Vite + ONNX Runtime Web, hosted on GitHub Pages. Source in [`
 12. [Future work](#future-work)
 13. [License](#license)
 14. [Author](#author)
-15. [Resumen en español](#resumen-en-español)
 
 ---
 
@@ -248,15 +247,5 @@ MIT — see [LICENSE](LICENSE).
 
 - GitHub: [github.com/jpulgar](https://github.com/jpulgar)
 - LinkedIn: [linkedin.com/in/jpulgar](https://linkedin.com/in/jpulgar)
-
-[⬆ Back to top](#fraud-autoencoder)
-
----
-
-## Resumen en español
-
-Este proyecto aplica un autoencoder para detectar fraude en tarjetas de crédito de forma no supervisada: el modelo se entrena únicamente con transacciones legítimas y marca como sospechosas aquellas que no consigue reconstruir bien. El conjunto de datos es el de Kaggle "Credit Card Fraud Detection" (ULB), con 284.807 transacciones y un desequilibrio extremo del 0,17% de fraude. El modelo alcanza PR-AUC 0,37 y ROC-AUC 0,92 sin acceso a ninguna etiqueta durante el entrenamiento. El enfoque no supervisado es la elección deliberada del proyecto: en producción real, los patrones de fraude evolucionan más rápido de lo que llegan las etiquetas, y un autoencoder puede detectar cualquier desviación del comportamiento legítimo sin necesidad de ejemplos previos de fraude.
-
-Hay una **demo interactiva en el navegador** (sin servidor, sin instalación) disponible en el enlace de la sección [Live demo](#live-demo). Puedes probar transacciones de ejemplo, introducir valores manualmente o subir un CSV.
 
 [⬆ Back to top](#fraud-autoencoder)
