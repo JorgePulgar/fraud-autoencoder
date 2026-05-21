@@ -28,7 +28,7 @@
 - [x] **Task 6.5** — Replace ad-hoc loading states with shadcn `Skeleton` placeholders. Before `useModel()` resolves: skeleton for the preset cards, manual form, histogram, and bar chart. After resolution, fade in real content. Verify by throttling network in dev tools to "Slow 3G" — skeletons appear, then the real UI.
   - Commit: `feat(ui): add skeleton loading states`
 
-- [ ] **Task 6.6** — Add error states. If `useModel()` rejects (e.g., a 404 on `autoencoder.onnx`), render a friendly error card with the error message and a "Reload" button. Verify by temporarily renaming the ONNX file in `demo/public/` and reloading — error card shows; rename it back; reload — UI returns.
+- [x] **Task 6.6** — Add error states. If `useModel()` rejects (e.g., a 404 on `autoencoder.onnx`), render a friendly error card with the error message and a "Reload" button. Verify by temporarily renaming the ONNX file in `demo/public/` and reloading — error card shows; rename it back; reload — UI returns.
   - Commit: `feat(ui): add model-load error state`
 
 - [ ] **Task 6.7** — Mobile breakpoint pass. At `< 768px`: PresetRunner and ManualInputForm stack vertically; the threshold slider is replaced by a number input with min/max/step; charts stack and shrink to viewport width; the manual input form's 30 fields move into a shadcn `Accordion` to avoid an overwhelming wall. Verify in Chrome DevTools mobile viewport (iPhone 12, Pixel 5): every interactive element is reachable and readable.
