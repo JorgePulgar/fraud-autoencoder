@@ -1,4 +1,10 @@
+import * as ort from 'onnxruntime-web'
 import './index.css'
+
+// Single-threaded wasm — GitHub Pages cannot serve the COOP/COEP headers
+// required for SharedArrayBuffer (needed by threaded wasm).
+ort.env.wasm.numThreads = 1
+ort.env.wasm.wasmPaths = `${import.meta.env.BASE_URL}ort/`
 
 export default function App() {
   return (
