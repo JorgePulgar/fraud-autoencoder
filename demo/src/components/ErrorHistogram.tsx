@@ -10,6 +10,7 @@ import {
 } from 'recharts'
 import { useDemoStore } from '@/store'
 import type { HistogramSample } from '@/types'
+import WhyPRAUCPopover from '@/components/WhyPRAUCPopover'
 
 const BINS = 40
 
@@ -49,9 +50,12 @@ export default function ErrorHistogram({ histogramData }: Props) {
 
   return (
     <div className="space-y-3">
-      <h2 className="font-mono text-sm font-semibold text-muted-foreground uppercase tracking-widest">
-        Reconstruction Error Distribution
-      </h2>
+      <div className="flex items-center gap-2">
+        <h2 className="font-mono text-sm font-semibold text-muted-foreground uppercase tracking-widest">
+          Reconstruction Error Distribution
+        </h2>
+        <WhyPRAUCPopover />
+      </div>
       <div className="flex gap-4 font-mono text-xs text-muted-foreground">
         <span className="flex items-center gap-1.5">
           <span className="inline-block w-3 h-3 rounded-sm bg-emerald-500/70" /> Legit
