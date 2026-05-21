@@ -41,13 +41,13 @@ export function useModel(): ModelState {
           fetchJson<ScalerParams>('scaler.json'),
           fetchJson<Threshold>('threshold.json'),
           fetchJson<Preset[]>('presets.json'),
-          fetchJson<HistogramSample[]>('histogram-data.json'),
+          fetchJson<{ samples: HistogramSample[] }>('histogram-data.json'),
         ])
 
         const session = await loadModel(`${BASE}autoencoder.onnx`)
 
         if (!cancelled) {
-          setState({ status: 'ready', session, scaler, threshold, presets, histogramData, error: null })
+          setState({ status: 'ready', session, scaler, threshold, presets, histogramData: histogramData.samples, error: null })
         }
       } catch (err) {
         if (!cancelled) {
