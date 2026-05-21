@@ -31,7 +31,7 @@
 - [x] **Task 1.4** — Implement the `scaler.json` writer. Read `scaler.pkl`, write `{"mean": [...], "scale": [...], "feature_order": ["Time", "V1", ..., "V28", "Amount"]}` to `demo/public/scaler.json`. Verify: load the JSON back, apply `(row - mean) / scale` to a known test row, compare to `scaler.transform(row)` from sklearn — diff must be 0 (or `< 1e-10`).
   - Commit: `feat(export): write scaler.json with mean/scale/feature_order`
 
-- [ ] **Task 1.5** — Copy `threshold.json` verbatim to `demo/public/threshold.json` and copy `models/autoencoder.onnx` to `demo/public/autoencoder.onnx`. Verify: `onnxruntime.InferenceSession("demo/public/autoencoder.onnx")` loads successfully and a forward pass on a single scaled row returns shape `(1, 30)`.
+- [x] **Task 1.5** — Copy `threshold.json` verbatim to `demo/public/threshold.json` and copy `models/autoencoder.onnx` to `demo/public/autoencoder.onnx`. Verify: `onnxruntime.InferenceSession("demo/public/autoencoder.onnx")` loads successfully and a forward pass on a single scaled row returns shape `(1, 30)`.
   - Commit: `feat(export): copy onnx model and threshold into demo/public`
 
 - [ ] **Task 1.6** — Build `presets.json`. Deterministically sample 3 legit + 3 fraud rows from the test set (sort by index, take first 3 of each class). For each row, compute AE reconstruction error in Python (per-sample MSE across 30 features). Also refit Isolation Forest (`contamination=0.0017`, `random_state=42`) on training-set features and score these 6 rows. Write a list with `{id, raw_features: {Time, V1..V28, Amount}, true_label (0|1), ae_error: float, if_score: float}` per row to `demo/public/presets.json`. Verify: 6 entries, schema correct, ae_error > 0 for all, true_label distribution is exactly 3 legit + 3 fraud.
