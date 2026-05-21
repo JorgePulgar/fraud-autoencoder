@@ -22,6 +22,18 @@ npm run build    # outputs to demo/dist/
 
 Asset paths are configured for the `/fraud-autoencoder/` GitHub Pages subpath.
 
+## Deployment
+
+Pushing to `main` when files under `demo/` change triggers the GitHub Actions workflow (`.github/workflows/deploy-demo.yml`), which builds and deploys `demo/dist/` to GitHub Pages automatically.
+
+**One-time manual step (do this once per repo):**
+
+1. Go to the repo on GitHub → **Settings** → **Pages**.
+2. Under **Build and deployment → Source**, select **GitHub Actions**.
+3. Save. The next push to `main` that touches `demo/` will deploy automatically.
+
+The deployed URL will be `https://<your-username>.github.io/fraud-autoencoder/`.
+
 ## Related
 
 - [v1 research project — README](../README.md)
