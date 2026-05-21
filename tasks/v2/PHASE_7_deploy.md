@@ -32,7 +32,7 @@
 - [x] **Task 7.6** — Add a deploy-status badge to v1 `README.md`. Format: `![Deploy](https://github.com/<user>/fraud-autoencoder/actions/workflows/deploy-demo.yml/badge.svg)`. Place near the top, next to any existing badges. Verify by opening the rendered README on GitHub — badge shows green.
   - Commit: `docs(readme): add deploy status badge`
 
-- [ ] **Task 7.7** — Finalize `demo/README.md`. Sections: project description (one paragraph), link to the deployed URL, architecture (4-line summary: React + Vite + ONNX Runtime Web + GitHub Pages), local dev (`cd demo && npm ci && npm run dev`), build (`npm run build`), deployment notes (push to main triggers the action; Pages source must be set to "GitHub Actions"), link back to v1 `README.md` and `CONTEXT.md`, MIT license note. Verify by reading on GitHub.
+- [x] **Task 7.7** — Finalize `demo/README.md`. Sections: project description (one paragraph), link to the deployed URL, architecture (4-line summary: React + Vite + ONNX Runtime Web + GitHub Pages), local dev (`cd demo && npm ci && npm run dev`), build (`npm run build`), deployment notes (push to main triggers the action; Pages source must be set to "GitHub Actions"), link back to v1 `README.md` and `CONTEXT.md`, MIT license note. Verify by reading on GitHub.
   - Commit: `docs(demo): finalize demo readme`
 
 - [ ] **Task 7.8** — Final cross-check. Visit the deployed URL from a fresh incognito tab on a phone (or use BrowserStack / Chrome DevTools mobile emulation). Walk through: load → preset → manual form → CSV → threshold slider → histogram → footer link to v1 → back. Note any issues in `DEVLOG.md` (under a new "v2 deploy" entry) and fix or defer to "future work" with a justification.
