@@ -78,7 +78,7 @@ Update this section as you complete phases:
 
 - [x] Phase 1 — Asset export pipeline
 - [x] Phase 2 — Demo scaffold
-- [ ] Phase 3 — Inference core
+- [x] Phase 3 — Inference core
 - [ ] Phase 4 — UI part 1 (presets + manual + latency)
 - [ ] Phase 5 — UI part 2 (CSV + threshold slider + histogram + IF)
 - [ ] Phase 6 — Polish, copy, framing
