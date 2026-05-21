@@ -8,8 +8,6 @@ function ortWasm(): Plugin {
   const ortSrc = path.resolve(__dirname, 'node_modules/onnxruntime-web/dist')
   return {
     name: 'ort-wasm',
-    // prod: copy to dist/ort/ after bundle
-    apply: 'build',
     closeBundle() {
       const dest = path.resolve(__dirname, 'dist/ort')
       fs.mkdirSync(dest, { recursive: true })
