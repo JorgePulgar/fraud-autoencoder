@@ -29,7 +29,7 @@
 - [x] **Task 7.5** — Update v1 `README.md`. Add a "Live demo" section near the top (after the project title, before the architecture section) with: link to the deployed URL, a short paragraph framing the demo as the interactive face of the project, and a screenshot or GIF if easy to produce (optional). Verify by reading the README top-to-bottom — flow is natural.
   - Commit: `docs(readme): link to live in-browser demo`
 
-- [ ] **Task 7.6** — Add a deploy-status badge to v1 `README.md`. Format: `![Deploy](https://github.com/<user>/fraud-autoencoder/actions/workflows/deploy-demo.yml/badge.svg)`. Place near the top, next to any existing badges. Verify by opening the rendered README on GitHub — badge shows green.
+- [x] **Task 7.6** — Add a deploy-status badge to v1 `README.md`. Format: `![Deploy](https://github.com/<user>/fraud-autoencoder/actions/workflows/deploy-demo.yml/badge.svg)`. Place near the top, next to any existing badges. Verify by opening the rendered README on GitHub — badge shows green.
   - Commit: `docs(readme): add deploy status badge`
 
 - [ ] **Task 7.7** — Finalize `demo/README.md`. Sections: project description (one paragraph), link to the deployed URL, architecture (4-line summary: React + Vite + ONNX Runtime Web + GitHub Pages), local dev (`cd demo && npm ci && npm run dev`), build (`npm run build`), deployment notes (push to main triggers the action; Pages source must be set to "GitHub Actions"), link back to v1 `README.md` and `CONTEXT.md`, MIT license note. Verify by reading on GitHub.
