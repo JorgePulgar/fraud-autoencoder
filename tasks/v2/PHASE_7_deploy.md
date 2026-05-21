@@ -26,7 +26,7 @@
 - [x] **Task 7.4** — Push to `main` (user does this manually — Claude must ask first). Watch the workflow at `https://github.com/<user>/fraud-autoencoder/actions`. Once green, visit the deployed URL and verify: model loads, presets run, manual form works, CSV upload accepts a small file, threshold slider drags correctly, histogram updates. If anything 404s, find the path issue and fix in a follow-up commit.
   - Commit: (only if a fix is needed) `fix(demo): correct deployed asset path`
 
-- [ ] **Task 7.5** — Update v1 `README.md`. Add a "Live demo" section near the top (after the project title, before the architecture section) with: link to the deployed URL, a short paragraph framing the demo as the interactive face of the project, and a screenshot or GIF if easy to produce (optional). Verify by reading the README top-to-bottom — flow is natural.
+- [x] **Task 7.5** — Update v1 `README.md`. Add a "Live demo" section near the top (after the project title, before the architecture section) with: link to the deployed URL, a short paragraph framing the demo as the interactive face of the project, and a screenshot or GIF if easy to produce (optional). Verify by reading the README top-to-bottom — flow is natural.
   - Commit: `docs(readme): link to live in-browser demo`
 
 - [ ] **Task 7.6** — Add a deploy-status badge to v1 `README.md`. Format: `![Deploy](https://github.com/<user>/fraud-autoencoder/actions/workflows/deploy-demo.yml/badge.svg)`. Place near the top, next to any existing badges. Verify by opening the rendered README on GitHub — badge shows green.
