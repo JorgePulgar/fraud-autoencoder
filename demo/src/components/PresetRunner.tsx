@@ -51,9 +51,14 @@ export default function PresetRunner({ session, scaler, presets, onInfer }: Prop
 
   return (
     <div className="space-y-3">
-      <h2 className="font-mono text-sm font-semibold text-muted-foreground uppercase tracking-widest">
-        Preset Transactions
-      </h2>
+      <div>
+        <h2 className="font-mono text-sm font-semibold text-muted-foreground uppercase tracking-widest">
+          Preset Transactions
+        </h2>
+        <p className="font-mono text-xs text-muted-foreground/60 mt-0.5">
+          3 legitimate · 3 fraudulent · AE and Isolation Forest verdicts side-by-side.
+        </p>
+      </div>
       <div className="grid grid-cols-1 gap-3">
         {presets.map((preset) => {
           const result = results[preset.id]
@@ -65,7 +70,7 @@ export default function PresetRunner({ session, scaler, presets, onInfer }: Prop
           return (
             <div
               key={preset.id}
-              className="rounded-lg border border-border bg-card p-4 flex items-center justify-between gap-4"
+              className="rounded-lg border border-border bg-card p-4 flex items-center justify-between gap-4 transition-colors hover:bg-zinc-900/40"
             >
               <div className="flex items-center gap-3 min-w-0 flex-wrap">
                 <span className="font-mono text-xs text-muted-foreground w-16 shrink-0">{preset.id}</span>

@@ -20,10 +20,15 @@ export default function ThresholdSlider({ histogramData, threshold }: Props) {
 
   return (
     <div className="space-y-3">
-      <div className="flex items-center justify-between">
-        <h2 className="font-mono text-sm font-semibold text-muted-foreground uppercase tracking-widest">
-          Threshold
-        </h2>
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h2 className="font-mono text-sm font-semibold text-muted-foreground uppercase tracking-widest">
+            Detection Threshold
+          </h2>
+          <p className="font-mono text-xs text-muted-foreground/60 mt-0.5">
+            Drag to adjust the fraud/legit boundary · re-classifies all loaded rows in real time.
+          </p>
+        </div>
         <div className="flex items-center gap-3">
           <span className="font-mono text-sm text-foreground tabular-nums">
             {current.toFixed(4)}

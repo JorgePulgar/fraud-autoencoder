@@ -35,12 +35,16 @@ export default function FeatureBarChart({ perFeatureError }: Props) {
   }, [perFeatureError])
 
   return (
-    <div className="space-y-2">
-      <h2 className="font-mono text-sm font-semibold text-muted-foreground uppercase tracking-widest">
-        Per-Feature Reconstruction Error
-      </h2>
-      <div className="rounded-lg border border-border bg-card p-4">
-        <ResponsiveContainer width="100%" height={220}>
+    <div className="space-y-3">
+      <div>
+        <h2 className="font-mono text-sm font-semibold text-muted-foreground uppercase tracking-widest">
+          Per-Feature Reconstruction Error
+        </h2>
+        <p className="font-mono text-xs text-muted-foreground/60 mt-0.5">
+          Bars above the median are highlighted violet.
+        </p>
+      </div>
+      <ResponsiveContainer width="100%" height={220}>
           <BarChart data={data} margin={{ top: 4, right: 4, bottom: 0, left: 0 }}>
             <XAxis
               dataKey="name"
@@ -76,7 +80,6 @@ export default function FeatureBarChart({ perFeatureError }: Props) {
             </Bar>
           </BarChart>
         </ResponsiveContainer>
-      </div>
     </div>
   )
 }
