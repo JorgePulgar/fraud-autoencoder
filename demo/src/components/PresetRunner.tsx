@@ -7,6 +7,9 @@ import { reconstructionError } from '@/lib/errors'
 import { classify } from '@/lib/threshold'
 import { useDemoStore } from '@/store'
 
+// score_samples convention: more negative = more anomalous
+const IF_THRESHOLD = -0.5
+
 interface CardResult {
   error: number
 }
@@ -21,7 +24,7 @@ interface Props {
 export default function PresetRunner({ session, scaler, presets, onInfer }: Props) {
   const [results, setResults] = useState<Record<string, CardResult>>({})
   const [running, setRunning] = useState<Record<string, boolean>>({})
-  const { setLastPrediction, setLastInput, threshold } = useDemoStore()
+  const { setLastPrediction, setLastInput, setLastPredictionSource, threshold } = useDemoStore()
 
   async function runPreset(preset: Preset) {
     if (threshold === null) return
@@ -39,6 +42,7 @@ export default function PresetRunner({ session, scaler, presets, onInfer }: Prop
       setResults((r) => ({ ...r, [preset.id]: { error: total } }))
       setLastPrediction(prediction)
       setLastInput({ scaled, raw: preset.raw_features })
+      setLastPredictionSource('preset')
       onInfer?.(elapsed)
     } finally {
       setRunning((r) => ({ ...r, [preset.id]: false }))
@@ -56,13 +60,14 @@ export default function PresetRunner({ session, scaler, presets, onInfer }: Prop
           const isRunning = running[preset.id] ?? false
           const trueLabel = preset.true_label === 1 ? 'fraud' : 'legit'
           const liveVerdict = result && threshold !== null ? classify(result.error, threshold) : null
+          const ifVerdict = preset.if_score < IF_THRESHOLD ? 'fraud' : 'legit'
 
           return (
             <div
               key={preset.id}
               className="rounded-lg border border-border bg-card p-4 flex items-center justify-between gap-4"
             >
-              <div className="flex items-center gap-3 min-w-0">
+              <div className="flex items-center gap-3 min-w-0 flex-wrap">
                 <span className="font-mono text-xs text-muted-foreground w-16 shrink-0">{preset.id}</span>
 
                 <span
@@ -72,25 +77,31 @@ export default function PresetRunner({ session, scaler, presets, onInfer }: Prop
                       : 'border-emerald-800 bg-emerald-950 text-emerald-400'
                   }`}
                 >
-                  {trueLabel}
+                  true: {trueLabel}
                 </span>
 
-                <div className="flex items-center gap-4 font-mono text-xs text-muted-foreground">
-                  <span>
+                <div className="flex items-center gap-3 font-mono text-xs">
+                  <span className="text-muted-foreground">
                     AE:{' '}
                     {result ? (
-                      <span
-                        className={liveVerdict === 'fraud' ? 'text-red-400' : 'text-emerald-400'}
-                      >
-                        {result.error.toFixed(5)}
+                      <span className={liveVerdict === 'fraud' ? 'text-red-400' : 'text-emerald-400'}>
+                        {liveVerdict ?? '—'}
                       </span>
                     ) : (
                       <span className="opacity-40">—</span>
                     )}
                   </span>
-                  <span>
-                    IF: <span className="text-foreground">{preset.if_score.toFixed(4)}</span>
+                  <span className="text-muted-foreground">
+                    IF:{' '}
+                    <span className={ifVerdict === 'fraud' ? 'text-red-400' : 'text-emerald-400'}>
+                      {ifVerdict}
+                    </span>
                   </span>
+                  {result && (
+                    <span className="text-muted-foreground/60 tabular-nums">
+                      err {result.error.toFixed(4)}
+                    </span>
+                  )}
                 </div>
               </div>
 

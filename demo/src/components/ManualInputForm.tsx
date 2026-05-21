@@ -32,7 +32,7 @@ interface Props {
 }
 
 export default function ManualInputForm({ session, scaler, defaultRaw, onInfer }: Props) {
-  const { setLastPrediction, setLastInput, threshold } = useDemoStore()
+  const { setLastPrediction, setLastInput, setLastPredictionSource, threshold } = useDemoStore()
 
   const defaultValues = Object.fromEntries(
     ALL_FEATURES.map((f) => [f, defaultRaw[f] ?? 0])
@@ -59,6 +59,7 @@ export default function ManualInputForm({ session, scaler, defaultRaw, onInfer }
     const prediction: Prediction = { error: total, perFeatureError: perFeature, verdict }
     setLastPrediction(prediction)
     setLastInput({ scaled, raw })
+    setLastPredictionSource('manual')
     onInfer?.(elapsed)
   }
 
