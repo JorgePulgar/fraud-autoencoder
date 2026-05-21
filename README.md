@@ -7,13 +7,21 @@ Unsupervised credit card fraud detection using a reconstruction-error autoencode
 
 ---
 
+## Live demo
+
+**[fraud-autoencoder — In-Browser Demo](https://JorgePulgar.github.io/fraud-autoencoder/)**
+
+The interactive face of this project. Run the trained autoencoder entirely in your browser — no server, no install, no data leaving your device. Try the 6 preset transactions (3 legit, 3 fraud), enter custom feature values manually, or upload a CSV batch. Drag the threshold slider to see how classification changes in real time.
+
+Built with React + Vite + ONNX Runtime Web and hosted on GitHub Pages. Source in [`demo/`](demo/).
+
+---
+
 ## Project summary
 
 This project applies an autoencoder to the Kaggle Credit Card Fraud Detection dataset (284,807 transactions, 492 fraud cases — 0.17% imbalance). The model is trained only on legitimate transactions and flags anomalies via reconstruction error: transactions the model cannot reconstruct well are marked as potential fraud.
 
 On the held-out test set the autoencoder achieves **PR-AUC 0.37 / ROC-AUC 0.92** with zero exposure to fraud labels during training. A supervised Logistic Regression baseline reaches PR-AUC 0.79 — that gap is expected and intentional (see [Why an autoencoder?](#why-an-autoencoder) below). The project is designed as a class exercise and portfolio piece for AI Engineering roles, prioritising engineering quality, reproducibility, and intellectual honesty over benchmark scores.
-
-🔗 **Live demo:** coming soon (in-browser via ONNX Runtime Web + GitHub Pages)
 
 ---
 
@@ -118,7 +126,6 @@ fraud-autoencoder/
 
 ## Future work
 
-- **In-browser demo** — ONNX Runtime Web + GitHub Pages; the ONNX model is already exported and numerically verified (max diff vs PyTorch < 1e-5)
 - **Supervised baseline: XGBoost** — to establish the full performance ceiling on this dataset
 - **Variational / denoising autoencoder** — a tighter learned latent manifold would reduce false-positive reconstruction errors on unusual-but-legitimate transactions
 - **Cost-sensitive threshold tuning** — replace F1-optimal threshold with one derived from a financial cost matrix (cost of a missed fraud >> cost of a false alarm)
