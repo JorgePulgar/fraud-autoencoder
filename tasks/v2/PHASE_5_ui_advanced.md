@@ -19,7 +19,7 @@
 - [x] **Task 5.2** — Build `src/components/ThresholdSlider.tsx`: shadcn `Slider` bounded to `[min, max]` of `histogramData.samples.map(s => s.error)`. Reads and writes `threshold` in the store. Display the current value in Geist Mono next to the slider, plus a small "Reset to F1-optimal" button. Verify: dragging the slider updates the store; reset button restores `f1_optimal`.
   - Commit: `feat(ui): add interactive threshold slider`
 
-- [ ] **Task 5.3** — Build `src/components/ErrorHistogram.tsx`: Recharts BarChart binning `histogramData.samples` into ~40 buckets across the error range. Two bars per bucket (or stacked): emerald for legit count, red for fraud count. Add a `ReferenceLine` at the current `threshold` from the store. Verify: histogram renders with both colors visible; threshold line moves live as the slider drags.
+- [x] **Task 5.3** — Build `src/components/ErrorHistogram.tsx`: Recharts BarChart binning `histogramData.samples` into ~40 buckets across the error range. Two bars per bucket (or stacked): emerald for legit count, red for fraud count. Add a `ReferenceLine` at the current `threshold` from the store. Verify: histogram renders with both colors visible; threshold line moves live as the slider drags.
   - Commit: `feat(ui): add reconstruction-error histogram`
 
 - [ ] **Task 5.4** — Install Papa Parse. `npm install papaparse @types/papaparse`. Build `src/components/CSVUpload.tsx`: a shadcn-styled drag-drop area + a file picker fallback. On file selection, parse with Papa Parse, validate that `Time, V1..V28, Amount` columns exist, and store the parsed rows in a local `useState<ParsedRow[]>`. Show a row count when valid. Verify: drop a CSV slice of the original Kaggle data, see "N rows loaded".
