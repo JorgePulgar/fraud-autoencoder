@@ -14,10 +14,10 @@
 
 ## Tasks
 
-- [ ] **Task 1.1** — Create `demo/` and `demo/public/` directories with `.gitkeep` files. Verify by `ls demo/public/` returning the `.gitkeep`.
+- [x] **Task 1.1** — Create `demo/` and `demo/public/` directories with `.gitkeep` files. Verify by `ls demo/public/` returning the `.gitkeep`.
   - Commit: `chore(demo): create demo scaffold directory`
 
-- [ ] **Task 1.2** — Update `.gitignore` to add explicit exceptions for the artifacts the demo needs to serve. Append a `# v2 demo artifacts (must ship)` section with:
+- [x] **Task 1.2** — Update `.gitignore` to add explicit exceptions for the artifacts the demo needs to serve. Append a `# v2 demo artifacts (must ship)` section with:
   ```
   !demo/public/autoencoder.onnx
   !demo/public/*.json
