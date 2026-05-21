@@ -34,6 +34,16 @@ def _load_splits():
     return splits
 
 
+def _write_scaler_json(out_dir: Path, scaler) -> None:
+    payload = {
+        "mean": scaler.mean_.tolist(),
+        "scale": scaler.scale_.tolist(),
+        "feature_order": FEATURE_ORDER,
+    }
+    (out_dir / "scaler.json").write_text(json.dumps(payload))
+    print(f"  wrote scaler.json ({len(payload['mean'])} features)")
+
+
 def main(out_dir: Path, verify: bool = False) -> None:
     print("Loading v1 artifacts...")
     scaler, threshold, session = _load_artifacts()
@@ -48,7 +58,11 @@ def main(out_dir: Path, verify: bool = False) -> None:
     splits = _load_splits()
     X_test, y_test = splits["X_test"], splits["y_test"]
     print(f"  X_test shape      : {X_test.shape}")
-    print(f"  y_test distribution: legit={( y_test==0).sum()}  fraud={(y_test==1).sum()}")
+    print(f"  y_test distribution: legit={(y_test==0).sum()}  fraud={(y_test==1).sum()}")
+
+    print("Writing artifacts...")
+    out_dir.mkdir(parents=True, exist_ok=True)
+    _write_scaler_json(out_dir, scaler)
 
     if verify:
         _run_verify(out_dir, scaler, threshold, session)
