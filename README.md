@@ -4,6 +4,7 @@ Unsupervised credit card fraud detection using a reconstruction-error autoencode
 
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
+![Deploy](https://github.com/JorgePulgar/fraud-autoencoder/actions/workflows/deploy-demo.yml/badge.svg)
 
 ---
 
