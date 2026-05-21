@@ -77,7 +77,7 @@ The task execution rules from `CLAUDE.md` (one task = one commit, conventional c
 Update this section as you complete phases:
 
 - [x] Phase 1 — Asset export pipeline
-- [ ] Phase 2 — Demo scaffold
+- [x] Phase 2 — Demo scaffold
 - [ ] Phase 3 — Inference core
 - [ ] Phase 4 — UI part 1 (presets + manual + latency)
 - [ ] Phase 5 — UI part 2 (CSV + threshold slider + histogram + IF)
