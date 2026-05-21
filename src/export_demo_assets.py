@@ -11,6 +11,7 @@ from pathlib import Path
 import joblib
 import numpy as np
 import onnxruntime as ort
+from sklearn.ensemble import IsolationForest
 
 from src.config import Config
 from src.data import load_raw_data, split_data
@@ -31,7 +32,7 @@ def _load_artifacts():
 def _load_splits():
     df = load_raw_data(str(Config.DATA_PATH))
     splits = split_data(df, Config.RANDOM_SEED)
-    return splits
+    return splits, df
 
 
 def _copy_threshold_and_onnx(out_dir: Path) -> None:
@@ -51,6 +52,57 @@ def _write_scaler_json(out_dir: Path, scaler) -> None:
     print(f"  wrote scaler.json ({len(payload['mean'])} features)")
 
 
+def _ae_errors(session, X_scaled: np.ndarray) -> np.ndarray:
+    """Return per-sample MSE reconstruction errors."""
+    x = X_scaled.astype(np.float32)
+    name = session.get_inputs()[0].name
+    recon = session.run(None, {name: x})[0]
+    return np.mean((x - recon) ** 2, axis=1)
+
+
+def _write_presets_json(
+    out_dir: Path,
+    scaler,
+    session,
+    X_test_raw: np.ndarray,
+    y_test: np.ndarray,
+    X_train_raw: np.ndarray,
+    y_train: np.ndarray,
+) -> None:
+    # First 3 legit + first 3 fraud rows from the test array
+    legit_idx = np.where(y_test == 0)[0][:3]
+    fraud_idx = np.where(y_test == 1)[0][:3]
+    indices = np.concatenate([legit_idx, fraud_idx])
+
+    X_raw = X_test_raw[indices]
+    y = y_test[indices]
+
+    X_scaled = scaler.transform(X_raw)
+    errors = _ae_errors(session, X_scaled)
+
+    # Refit IF on scaled training legit rows only
+    X_train_legit_scaled = scaler.transform(X_train_raw[y_train == 0])
+    iforest = IsolationForest(contamination=0.0017, random_state=42)
+    iforest.fit(X_train_legit_scaled)
+    if_scores = iforest.score_samples(X_scaled).tolist()
+
+    presets = []
+    for i, (raw_row, label, err, if_score) in enumerate(
+        zip(X_raw, y, errors, if_scores)
+    ):
+        presets.append({
+            "id": i,
+            "raw_features": dict(zip(FEATURE_ORDER, raw_row.tolist())),
+            "true_label": int(label),
+            "ae_error": float(err),
+            "if_score": float(if_score),
+        })
+
+    (out_dir / "presets.json").write_text(json.dumps(presets, indent=2))
+    labels = [p["true_label"] for p in presets]
+    print(f"  wrote presets.json (6 rows: {labels.count(0)} legit, {labels.count(1)} fraud)")
+
+
 def main(out_dir: Path, verify: bool = False) -> None:
     print("Loading v1 artifacts...")
     scaler, threshold, session = _load_artifacts()
@@ -62,8 +114,9 @@ def main(out_dir: Path, verify: bool = False) -> None:
     print(f"  onnx output       : {output_name} {session.get_outputs()[0].shape}")
 
     print("Loading test split...")
-    splits = _load_splits()
+    splits, df = _load_splits()
     X_test, y_test = splits["X_test"], splits["y_test"]
+    X_train_full, y_train_full = splits["X_train_full"], splits["y_train_full"]
     print(f"  X_test shape      : {X_test.shape}")
     print(f"  y_test distribution: legit={(y_test==0).sum()}  fraud={(y_test==1).sum()}")
 
@@ -71,6 +124,7 @@ def main(out_dir: Path, verify: bool = False) -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
     _write_scaler_json(out_dir, scaler)
     _copy_threshold_and_onnx(out_dir)
+    _write_presets_json(out_dir, scaler, session, X_test, y_test, X_train_full, y_train_full)
 
     if verify:
         _run_verify(out_dir, scaler, threshold, session)
