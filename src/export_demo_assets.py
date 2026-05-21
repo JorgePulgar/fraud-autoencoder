@@ -34,6 +34,13 @@ def _load_splits():
     return splits
 
 
+def _copy_threshold_and_onnx(out_dir: Path) -> None:
+    shutil.copy(Config.MODELS_DIR / "threshold.json", out_dir / "threshold.json")
+    print("  wrote threshold.json")
+    shutil.copy(Config.MODELS_DIR / "autoencoder.onnx", out_dir / "autoencoder.onnx")
+    print("  wrote autoencoder.onnx")
+
+
 def _write_scaler_json(out_dir: Path, scaler) -> None:
     payload = {
         "mean": scaler.mean_.tolist(),
@@ -63,6 +70,7 @@ def main(out_dir: Path, verify: bool = False) -> None:
     print("Writing artifacts...")
     out_dir.mkdir(parents=True, exist_ok=True)
     _write_scaler_json(out_dir, scaler)
+    _copy_threshold_and_onnx(out_dir)
 
     if verify:
         _run_verify(out_dir, scaler, threshold, session)
