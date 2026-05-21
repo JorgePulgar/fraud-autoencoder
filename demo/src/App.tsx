@@ -1,4 +1,5 @@
 import * as ort from 'onnxruntime-web'
+import { useEffect } from 'react'
 import { useModel } from '@/hooks/useModel'
 import { useLatency } from '@/hooks/useLatency'
 import { useDemoStore } from '@/store'
@@ -41,7 +42,11 @@ function ErrorCard({ message }: { message: string }) {
 export default function App() {
   const { status, session, scaler, threshold, presets, error: loadError } = useModel()
   const { last, avg, count, record } = useLatency()
-  const lastPrediction = useDemoStore((s) => s.lastPrediction)
+  const { lastPrediction, setThreshold } = useDemoStore()
+
+  useEffect(() => {
+    if (threshold) setThreshold(threshold.threshold_f1)
+  }, [threshold, setThreshold])
 
   const isReady = status === 'ready' && session && scaler && threshold && presets
 
@@ -66,7 +71,6 @@ export default function App() {
                 <PresetRunner
                   session={session}
                   scaler={scaler}
-                  threshold={threshold}
                   presets={presets}
                   onInfer={record}
                 />
@@ -76,7 +80,6 @@ export default function App() {
                 <ManualInputForm
                   session={session}
                   scaler={scaler}
-                  threshold={threshold}
                   defaultRaw={presets[0].raw_features}
                   onInfer={record}
                 />

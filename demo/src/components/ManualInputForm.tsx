@@ -8,7 +8,7 @@ import { runInference } from '@/lib/inference'
 import { reconstructionError } from '@/lib/errors'
 import { classify } from '@/lib/threshold'
 import { useDemoStore } from '@/store'
-import type { ScalerParams, Threshold, Prediction } from '@/types'
+import type { ScalerParams, Prediction } from '@/types'
 
 const V_NAMES = Array.from({ length: 28 }, (_, i) => `V${i + 1}`)
 const ALL_FEATURES = ['Time', ...V_NAMES, 'Amount'] as const
@@ -27,13 +27,12 @@ type FormValues = z.infer<typeof schema>
 interface Props {
   session: ort.InferenceSession
   scaler: ScalerParams
-  threshold: Threshold
   defaultRaw: Record<string, number>
   onInfer?: (durationMs: number) => void
 }
 
-export default function ManualInputForm({ session, scaler, threshold, defaultRaw, onInfer }: Props) {
-  const { setLastPrediction, setLastInput } = useDemoStore()
+export default function ManualInputForm({ session, scaler, defaultRaw, onInfer }: Props) {
+  const { setLastPrediction, setLastInput, threshold } = useDemoStore()
 
   const defaultValues = Object.fromEntries(
     ALL_FEATURES.map((f) => [f, defaultRaw[f] ?? 0])
@@ -47,13 +46,14 @@ export default function ManualInputForm({ session, scaler, threshold, defaultRaw
   const values = watch()
 
   async function onSubmit(data: FormValues) {
+    if (threshold === null) return
     const t0 = performance.now()
     const raw = data as Record<string, number>
     const vec = featuresToVector(raw, scaler.feature_order)
     const scaled = applyScaler(vec, scaler)
     const output = await runInference(session, scaled)
     const { perFeature, total } = reconstructionError(scaled, output)
-    const verdict = classify(total, threshold.threshold_p99)
+    const verdict = classify(total, threshold)
     const elapsed = performance.now() - t0
 
     const prediction: Prediction = { error: total, perFeatureError: perFeature, verdict }

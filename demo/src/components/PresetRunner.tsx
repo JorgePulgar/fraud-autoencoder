@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type * as ort from 'onnxruntime-web'
-import type { ScalerParams, Threshold, Preset, Prediction } from '@/types'
+import type { ScalerParams, Preset, Prediction } from '@/types'
 import { featuresToVector, applyScaler } from '@/lib/scaler'
 import { runInference } from '@/lib/inference'
 import { reconstructionError } from '@/lib/errors'
@@ -9,23 +9,22 @@ import { useDemoStore } from '@/store'
 
 interface CardResult {
   error: number
-  verdict: 'fraud' | 'legit'
 }
 
 interface Props {
   session: ort.InferenceSession
   scaler: ScalerParams
-  threshold: Threshold
   presets: Preset[]
   onInfer?: (durationMs: number) => void
 }
 
-export default function PresetRunner({ session, scaler, threshold, presets, onInfer }: Props) {
+export default function PresetRunner({ session, scaler, presets, onInfer }: Props) {
   const [results, setResults] = useState<Record<string, CardResult>>({})
   const [running, setRunning] = useState<Record<string, boolean>>({})
-  const { setLastPrediction, setLastInput } = useDemoStore()
+  const { setLastPrediction, setLastInput, threshold } = useDemoStore()
 
   async function runPreset(preset: Preset) {
+    if (threshold === null) return
     setRunning((r) => ({ ...r, [preset.id]: true }))
     try {
       const t0 = performance.now()
@@ -33,11 +32,11 @@ export default function PresetRunner({ session, scaler, threshold, presets, onIn
       const scaled = applyScaler(vec, scaler)
       const output = await runInference(session, scaled)
       const { perFeature, total } = reconstructionError(scaled, output)
-      const verdict = classify(total, threshold.threshold_p99)
+      const verdict = classify(total, threshold)
       const elapsed = performance.now() - t0
 
       const prediction: Prediction = { error: total, perFeatureError: perFeature, verdict }
-      setResults((r) => ({ ...r, [preset.id]: { error: total, verdict } }))
+      setResults((r) => ({ ...r, [preset.id]: { error: total } }))
       setLastPrediction(prediction)
       setLastInput({ scaled, raw: preset.raw_features })
       onInfer?.(elapsed)
@@ -56,6 +55,7 @@ export default function PresetRunner({ session, scaler, threshold, presets, onIn
           const result = results[preset.id]
           const isRunning = running[preset.id] ?? false
           const trueLabel = preset.true_label === 1 ? 'fraud' : 'legit'
+          const liveVerdict = result && threshold !== null ? classify(result.error, threshold) : null
 
           return (
             <div
@@ -80,7 +80,7 @@ export default function PresetRunner({ session, scaler, threshold, presets, onIn
                     AE:{' '}
                     {result ? (
                       <span
-                        className={result.verdict === 'fraud' ? 'text-red-400' : 'text-emerald-400'}
+                        className={liveVerdict === 'fraud' ? 'text-red-400' : 'text-emerald-400'}
                       >
                         {result.error.toFixed(5)}
                       </span>

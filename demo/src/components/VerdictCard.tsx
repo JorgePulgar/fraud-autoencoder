@@ -1,3 +1,5 @@
+import { useDemoStore } from '@/store'
+import { classify } from '@/lib/threshold'
 import type { Prediction } from '@/types'
 
 interface Props {
@@ -5,7 +7,9 @@ interface Props {
 }
 
 export default function VerdictCard({ prediction }: Props) {
-  const isFraud = prediction.verdict === 'fraud'
+  const threshold = useDemoStore((s) => s.threshold)
+  const liveVerdict = threshold !== null ? classify(prediction.error, threshold) : prediction.verdict
+  const isFraud = liveVerdict === 'fraud'
 
   return (
     <div
