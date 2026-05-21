@@ -5,6 +5,7 @@ import { featuresToVector, applyScaler } from '@/lib/scaler'
 import { runInference } from '@/lib/inference'
 import { reconstructionError } from '@/lib/errors'
 import { classify } from '@/lib/threshold'
+import Header from '@/components/Header'
 import './index.css'
 
 // Single-threaded wasm — GitHub Pages cannot serve COOP/COEP headers.
@@ -41,7 +42,9 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex items-center justify-center p-6">
+    <div className="min-h-screen bg-background text-foreground">
+      <Header />
+      <div className="flex items-center justify-center p-6">
       <div className="w-full max-w-2xl rounded-lg border border-border bg-card p-8 shadow-sm space-y-4">
         <h1 className="font-mono text-3xl font-semibold tracking-tight text-foreground">
           Fraud Detection — Autoencoder Demo
@@ -72,6 +75,7 @@ export default function App() {
             <div>match: <span className={result.match ? 'text-emerald-500' : 'text-red-500'}>{result.match ? '✓' : '✗'}</span></div>
           </div>
         )}
+      </div>
       </div>
     </div>
   )
