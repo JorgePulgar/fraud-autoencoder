@@ -24,8 +24,6 @@ The interactive face of this project. Run the trained autoencoder entirely in yo
 
 Built with React + Vite + ONNX Runtime Web, hosted on GitHub Pages. Source in [`demo/`](demo/).
 
-[⬆ Back to top](#fraud-autoencoder)
-
 ---
 
 ## TL;DR
@@ -34,8 +32,6 @@ Built with React + Vite + ONNX Runtime Web, hosted on GitHub Pages. Source in [`
 - **Why this framing:** in production, fraud evolves faster than labels arrive — a model that needs labeled fraud examples is brittle by design. An autoencoder only needs examples of normal behaviour.
 - **Result:** PR-AUC **0.37** vs **0.11** for Isolation Forest (~3× the unsupervised baseline). A supervised Logistic Regression hits **0.79** — that gap is the expected, documented cost of going label-free.
 - **Engineering:** reproducible end-to-end pipeline, ONNX export with numerical sanity check (<1e-5), and a static in-browser demo on GitHub Pages running the exact same model client-side.
-
-[⬆ Back to top](#fraud-autoencoder)
 
 ---
 
@@ -49,8 +45,6 @@ Built with React + Vite + ONNX Runtime Web, hosted on GitHub Pages. Source in [`
 - **Static in-browser demo** — same model, same preprocessing, running client-side on GitHub Pages. No backend, no data egress.
 - **Reproducible by construction** — fixed seeds across NumPy / PyTorch / Python / scikit-learn, all hyperparameters in `src/config.py`, every script runnable from project root.
 - **Atomic commit history** — phase-driven development, one task = one commit, decisions logged in [`DEVLOG.md`](DEVLOG.md).
-
-[⬆ Back to top](#fraud-autoencoder)
 
 ---
 
@@ -72,8 +66,6 @@ Built with React + Vite + ONNX Runtime Web, hosted on GitHub Pages. Source in [`
 14. [Author](#author)
 15. [Resumen en español](#resumen-en-español)
 
-[⬆ Back to top](#fraud-autoencoder)
-
 ---
 
 ## Project summary
@@ -81,8 +73,6 @@ Built with React + Vite + ONNX Runtime Web, hosted on GitHub Pages. Source in [`
 This project applies an autoencoder to the Kaggle Credit Card Fraud Detection dataset (284,807 transactions, 492 fraud cases — 0.17% imbalance). The model is trained only on legitimate transactions and flags anomalies via reconstruction error: transactions the model cannot reconstruct well are marked as potential fraud.
 
 On the held-out test set the autoencoder achieves **PR-AUC 0.37 / ROC-AUC 0.92** with zero exposure to fraud labels during training. A supervised Logistic Regression baseline reaches PR-AUC 0.79 — that gap is expected and intentional (see [Why an autoencoder?](#why-an-autoencoder) below). The project is designed as a class exercise and portfolio piece for AI Engineering roles, prioritising engineering quality, reproducibility, and intellectual honesty over benchmark scores.
-
-[⬆ Back to top](#fraud-autoencoder)
 
 ---
 
@@ -97,8 +87,6 @@ Test set evaluation (stratified 15% holdout, threshold selected on validation se
 | Logistic Regression | — | — | — | 0.7928 | 0.9677 |
 
 Precision/Recall/F1 for the baselines are omitted — they require a separately calibrated decision threshold, which is outside their standard evaluation protocol. PR-AUC and ROC-AUC, computed from raw scores, are the fair threshold-independent comparison.
-
-[⬆ Back to top](#fraud-autoencoder)
 
 ---
 
