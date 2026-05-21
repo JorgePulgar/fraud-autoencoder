@@ -19,7 +19,7 @@
 - [x] **Task 6.2** — Add the always-visible disclaimer banner near the header: "Portfolio project on public Kaggle data. Not a production fraud system." Use a muted shadcn `Alert` with no dismiss button. Verify: visible on first paint.
   - Commit: `feat(ui): add portfolio disclaimer banner`
 
-- [ ] **Task 6.3** — Build `src/components/WhyPRAUCPopover.tsx`: a shadcn `Popover` triggered by a help icon next to the histogram. Body explains in 3–4 short sentences why supervised methods would beat the autoencoder on raw F1, and why the autoencoder framing is still the right one. Mirror the language from v1 README's "Why an autoencoder" section. Verify: clicking the icon opens the popover; clicking outside closes it.
+- [x] **Task 6.3** — Build `src/components/WhyPRAUCPopover.tsx`: a shadcn `Popover` triggered by a help icon next to the histogram. Body explains in 3–4 short sentences why supervised methods would beat the autoencoder on raw F1, and why the autoencoder framing is still the right one. Mirror the language from v1 README's "Why an autoencoder" section. Verify: clicking the icon opens the popover; clicking outside closes it.
   - Commit: `feat(ui): add 'why PR-AUC 0.37' popover`
 
 - [ ] **Task 6.4** — Build `src/components/Footer.tsx`: short Spanish blurb (3–5 lines summarizing the project), links to v1 README, v1 DEVLOG, MIT license, and the author's contact (GitHub + email placeholder). Verify visually that Spanish text is correct and links resolve.
