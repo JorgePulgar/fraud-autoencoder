@@ -82,4 +82,4 @@ Update this section as you complete phases:
 - [x] Phase 4 — UI part 1 (presets + manual + latency)
 - [x] Phase 5 — UI part 2 (CSV + threshold slider + histogram + IF)
 - [x] Phase 6 — Polish, copy, framing
-- [ ] Phase 7 — Deployment + cross-linking
+- [x] Phase 7 — Deployment + cross-linking
