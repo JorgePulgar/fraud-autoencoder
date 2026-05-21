@@ -25,7 +25,7 @@
 - [x] **Task 6.4** — Build `src/components/Footer.tsx`: short Spanish blurb (3–5 lines summarizing the project), links to v1 README, v1 DEVLOG, MIT license, and the author's contact (GitHub + email placeholder). Verify visually that Spanish text is correct and links resolve.
   - Commit: `feat(ui): add footer with spanish blurb and links`
 
-- [ ] **Task 6.5** — Replace ad-hoc loading states with shadcn `Skeleton` placeholders. Before `useModel()` resolves: skeleton for the preset cards, manual form, histogram, and bar chart. After resolution, fade in real content. Verify by throttling network in dev tools to "Slow 3G" — skeletons appear, then the real UI.
+- [x] **Task 6.5** — Replace ad-hoc loading states with shadcn `Skeleton` placeholders. Before `useModel()` resolves: skeleton for the preset cards, manual form, histogram, and bar chart. After resolution, fade in real content. Verify by throttling network in dev tools to "Slow 3G" — skeletons appear, then the real UI.
   - Commit: `feat(ui): add skeleton loading states`
 
 - [ ] **Task 6.6** — Add error states. If `useModel()` rejects (e.g., a 404 on `autoencoder.onnx`), render a friendly error card with the error message and a "Reload" button. Verify by temporarily renaming the ONNX file in `demo/public/` and reloading — error card shows; rename it back; reload — UI returns.
