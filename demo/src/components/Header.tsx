@@ -8,17 +8,17 @@ export default function Header() {
           Fraud Detection — Autoencoder Demo
         </h1>
         <p className="text-sm text-muted-foreground mt-0.5">
-          Static, in-browser fraud-detection demo
+          Autoencoder trained on the Kaggle Credit Card Fraud dataset · inference runs entirely in your browser via ONNX Runtime Web
         </p>
       </div>
 
       <div className="flex items-center gap-4">
         <span className="flex items-center gap-1.5 rounded-full border border-emerald-800 bg-emerald-950 px-3 py-1 text-xs font-mono text-emerald-400">
           <ShieldCheck className="h-3.5 w-3.5" />
-          Inference runs in your browser — no data leaves your device
+          No data leaves your device
         </span>
         <a
-          href="https://github.com/jorgeulgar/fraud-autoencoder"
+          href="https://github.com/jpulgar111/fraud-autoencoder"
           target="_blank"
           rel="noopener noreferrer"
           className="text-xs font-mono text-muted-foreground hover:text-foreground transition-colors"

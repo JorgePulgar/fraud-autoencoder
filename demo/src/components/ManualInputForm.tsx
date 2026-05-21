@@ -66,7 +66,7 @@ export default function ManualInputForm({ session, scaler, defaultRaw, onInfer }
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <h2 className="font-mono text-sm font-semibold text-muted-foreground uppercase tracking-widest">
-        Manual Input
+        Manual Transaction Input
       </h2>
 
       {/* Time + Amount */}

@@ -96,7 +96,7 @@ export default function CSVUpload({ onRows }: Props) {
             : 'Drop a CSV file here or click to browse'}
         </p>
         <p className="font-mono text-xs text-muted-foreground/60 mt-1">
-          Required columns: Time, V1–V28, Amount
+          Required columns: Time, V1–V28, Amount · Class column ignored if present
         </p>
         <input
           ref={inputRef}
