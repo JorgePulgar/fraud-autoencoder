@@ -1,82 +1,107 @@
-import { useState } from 'react'
 import * as ort from 'onnxruntime-web'
 import { useModel } from '@/hooks/useModel'
-import { featuresToVector, applyScaler } from '@/lib/scaler'
-import { runInference } from '@/lib/inference'
-import { reconstructionError } from '@/lib/errors'
-import { classify } from '@/lib/threshold'
+import { useLatency } from '@/hooks/useLatency'
+import { useDemoStore } from '@/store'
 import Header from '@/components/Header'
+import PresetRunner from '@/components/PresetRunner'
+import ManualInputForm from '@/components/ManualInputForm'
+import VerdictCard from '@/components/VerdictCard'
+import FeatureBarChart from '@/components/FeatureBarChart'
+import LatencyCounter from '@/components/LatencyCounter'
 import './index.css'
 
-// Single-threaded wasm — GitHub Pages cannot serve COOP/COEP headers.
 ort.env.wasm.numThreads = 1
 ort.env.wasm.wasmPaths = `${import.meta.env.BASE_URL}ort/`
 
-interface SmokeResult {
-  error: number
-  verdict: 'fraud' | 'legit'
-  expected: 'fraud' | 'legit'
-  match: boolean
+function LoadingCard({ message }: { message: string }) {
+  return (
+    <div className="rounded-lg border border-border bg-card p-6 animate-pulse">
+      <div className="h-4 w-48 rounded bg-zinc-800 mb-3" />
+      <div className="h-3 w-32 rounded bg-zinc-800" />
+      <p className="font-mono text-xs text-muted-foreground mt-4">{message}</p>
+    </div>
+  )
+}
+
+function ErrorCard({ message }: { message: string }) {
+  return (
+    <div className="rounded-lg border border-red-800 bg-red-950/30 p-6">
+      <p className="font-mono text-sm text-red-400">Failed to load model</p>
+      <p className="font-mono text-xs text-muted-foreground mt-2">{message}</p>
+      <button
+        onClick={() => window.location.reload()}
+        className="mt-4 rounded px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 font-mono text-xs text-foreground transition-colors"
+      >
+        Reload
+      </button>
+    </div>
+  )
 }
 
 export default function App() {
   const { status, session, scaler, threshold, presets, error: loadError } = useModel()
-  const [result, setResult] = useState<SmokeResult | null>(null)
-  const [running, setRunning] = useState(false)
+  const { last, avg, count, record } = useLatency()
+  const lastPrediction = useDemoStore((s) => s.lastPrediction)
 
-  async function runPreset0() {
-    if (!session || !scaler || !threshold || !presets) return
-    setRunning(true)
-    try {
-      const preset = presets[0]
-      const vec = featuresToVector(preset.raw_features, scaler.feature_order)
-      const scaled = applyScaler(vec, scaler)
-      const output = await runInference(session, scaled)
-      const { total } = reconstructionError(scaled, output)
-      const verdict = classify(total, threshold.threshold_p99)
-      const expected = preset.true_label === 1 ? 'fraud' : 'legit'
-      setResult({ error: total, verdict, expected, match: verdict === expected })
-    } finally {
-      setRunning(false)
-    }
-  }
+  const isReady = status === 'ready' && session && scaler && threshold && presets
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
       <Header />
-      <div className="flex items-center justify-center p-6">
-      <div className="w-full max-w-2xl rounded-lg border border-border bg-card p-8 shadow-sm space-y-4">
-        <h1 className="font-mono text-3xl font-semibold tracking-tight text-foreground">
-          Fraud Detection — Autoencoder Demo
-        </h1>
-        <p className="text-muted-foreground">
-          In-browser inference on the Kaggle Credit Card Fraud dataset.
-          No data leaves your device.
-        </p>
 
-        <p className="font-mono text-sm">
-          Model: <span className={status === 'ready' ? 'text-emerald-500' : 'text-muted-foreground'}>{status}</span>
-          {loadError && <span className="text-red-500 ml-2">{loadError}</span>}
-        </p>
-
-        <button
-          onClick={runPreset0}
-          disabled={status !== 'ready' || running}
-          className="px-4 py-2 rounded bg-violet-500 text-white font-mono text-sm disabled:opacity-40"
-        >
-          {running ? 'Running…' : 'Run preset 0'}
-        </button>
-
-        {result && (
-          <div className="font-mono text-sm space-y-1 border border-border rounded p-4">
-            <div>error: <span className="text-foreground">{result.error.toFixed(6)}</span></div>
-            <div>verdict: <span className={result.verdict === 'fraud' ? 'text-red-500' : 'text-emerald-500'}>{result.verdict}</span></div>
-            <div>expected: <span className={result.expected === 'fraud' ? 'text-red-500' : 'text-emerald-500'}>{result.expected}</span></div>
-            <div>match: <span className={result.match ? 'text-emerald-500' : 'text-red-500'}>{result.match ? '✓' : '✗'}</span></div>
-          </div>
+      <main className="flex-1 p-6 max-w-7xl mx-auto w-full space-y-6">
+        {status === 'loading' && (
+          <LoadingCard message="Loading ONNX model and artifacts…" />
         )}
-      </div>
-      </div>
+
+        {status === 'error' && loadError && (
+          <ErrorCard message={loadError} />
+        )}
+
+        {isReady && (
+          <>
+            {/* Top section: presets + manual form side by side on desktop */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="rounded-lg border border-border bg-card p-6">
+                <PresetRunner
+                  session={session}
+                  scaler={scaler}
+                  threshold={threshold}
+                  presets={presets}
+                  onInfer={record}
+                />
+              </div>
+
+              <div className="rounded-lg border border-border bg-card p-6 overflow-y-auto max-h-[640px]">
+                <ManualInputForm
+                  session={session}
+                  scaler={scaler}
+                  threshold={threshold}
+                  defaultRaw={presets[0].raw_features}
+                  onInfer={record}
+                />
+              </div>
+            </div>
+
+            {/* Verdict card — full width, only when populated */}
+            {lastPrediction && (
+              <VerdictCard prediction={lastPrediction} />
+            )}
+
+            {/* Per-feature bar chart — full width, only when populated */}
+            {lastPrediction && (
+              <FeatureBarChart perFeatureError={lastPrediction.perFeatureError} />
+            )}
+          </>
+        )}
+      </main>
+
+      {/* Latency counter pinned to bottom-right */}
+      {last !== null && (
+        <div className="fixed bottom-4 right-4 rounded-lg border border-border bg-card/90 backdrop-blur px-3 py-2">
+          <LatencyCounter last={last} avg={avg} count={count} />
+        </div>
+      )}
     </div>
   )
 }
