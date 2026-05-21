@@ -20,7 +20,7 @@
 - [x] **Task 7.2** — Create `.github/workflows/deploy-demo.yml`. Trigger: `on: push: branches: [main]; paths: ['demo/**', '.github/workflows/deploy-demo.yml']`. Permissions: `pages: write, id-token: write`. Job: checkout, setup-node@v4 with cache for `demo/package-lock.json`, `npm ci` in `demo/`, `npm run build` in `demo/`, `actions/upload-pages-artifact@v3` with `path: demo/dist`, then `actions/deploy-pages@v4`. Verify locally with `act` if installed, otherwise lint the YAML by eye.
   - Commit: `ci(demo): add github actions workflow for pages deploy`
 
-- [ ] **Task 7.3** — One-time GitHub configuration. In the repo's Pages settings, set "Source" to "GitHub Actions". Document this step in `demo/README.md` under a "Deployment" section so future readers know it's a one-time manual switch.
+- [x] **Task 7.3** — One-time GitHub configuration. In the repo's Pages settings, set "Source" to "GitHub Actions". Document this step in `demo/README.md` under a "Deployment" section so future readers know it's a one-time manual switch.
   - Commit: `docs(demo): document pages source configuration step`
 
 - [ ] **Task 7.4** — Push to `main` (user does this manually — Claude must ask first). Watch the workflow at `https://github.com/<user>/fraud-autoencoder/actions`. Once green, visit the deployed URL and verify: model loads, presets run, manual form works, CSV upload accepts a small file, threshold slider drags correctly, histogram updates. If anything 404s, find the path issue and fix in a follow-up commit.
