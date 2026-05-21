@@ -13,7 +13,7 @@
 
 ## Tasks
 
-- [ ] **Task 5.1** — Extend the Zustand store with `threshold: number` (initialized to `threshold.f1_optimal` from the loaded JSON) and `setThreshold`. Refactor `PresetRunner` and `ManualInputForm` to read the live threshold from the store instead of using `f1_optimal` directly. Verify: changing `threshold` in dev tools (or via a temporary debug input) re-classifies the last prediction without re-running inference.
+- [x] **Task 5.1** — Extend the Zustand store with `threshold: number` (initialized to `threshold.f1_optimal` from the loaded JSON) and `setThreshold`. Refactor `PresetRunner` and `ManualInputForm` to read the live threshold from the store instead of using `f1_optimal` directly. Verify: changing `threshold` in dev tools (or via a temporary debug input) re-classifies the last prediction without re-running inference.
   - Commit: `feat(store): add live threshold to store`
 
 - [ ] **Task 5.2** — Build `src/components/ThresholdSlider.tsx`: shadcn `Slider` bounded to `[min, max]` of `histogramData.samples.map(s => s.error)`. Reads and writes `threshold` in the store. Display the current value in Geist Mono next to the slider, plus a small "Reset to F1-optimal" button. Verify: dragging the slider updates the store; reset button restores `f1_optimal`.
