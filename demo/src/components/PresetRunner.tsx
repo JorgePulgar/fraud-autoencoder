@@ -123,6 +123,11 @@ export default function PresetRunner({ session, scaler, presets, onInfer }: Prop
           )
         })}
       </div>
+      <p className="font-mono text-xs text-muted-foreground/50 pt-1">
+        At the F1-optimal threshold the autoencoder catches ~46% of fraud cases (recall 0.46, PR-AUC 0.37). Missing some fraud presets is expected — not a bug.
+        The model was trained with no fraud labels; some fraud transactions are close enough to legitimate patterns that the error stays below the threshold.
+        Drag the threshold slider down to catch more fraud at the cost of more false alarms.
+      </p>
     </div>
   )
 }
