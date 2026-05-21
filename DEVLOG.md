@@ -91,3 +91,28 @@ Keep entries short. If the fix is non-obvious or has tradeoffs, add a one-line *
 - `docs(context): restore original PR-AUC target; document gap honestly in DEVLOG`
 
 **Lesson:** PR-AUC is a rank-based metric. Post-processing transforms that preserve score ordering cannot improve it. Improving PR-AUC for a reconstruction-based anomaly detector requires a better model (tighter learned manifold), not better scoring arithmetic. Also: change success criteria before running experiments, not after seeing results you don't like.
+
+---
+
+## 2026-05-21 — v2 deploy (Phase 7)
+
+**Phase:** v2 Phase 7 — Deployment + Cross-linking
+
+**What shipped:**
+- GitHub Actions workflow (`.github/workflows/deploy-demo.yml`) triggers on push to `main` when `demo/**` changes; builds in `demo/`, deploys `demo/dist/` via `upload-pages-artifact@v3` + `deploy-pages@v4`.
+- Pages source set to "GitHub Actions" (one-time manual step in repo Settings → Pages).
+- Deployed URL: `https://JorgePulgar.github.io/fraud-autoencoder/`
+
+**Issues found and resolved:**
+- `demo/index.html` contained a `<link rel="icon" href="/favicon.svg">` with a hard-coded absolute path. No `favicon.svg` exists in `public/`, so the link would 404 on every page load. Removed the line. (`fix(demo): ensure all asset paths respect vite base`)
+- GitHub Pages UI shows Jekyll / Static HTML template suggestions when "GitHub Actions" source is selected — these are just workflow scaffolding prompts and can be ignored when a workflow file already exists in the repo.
+
+**Post-deploy verification (incognito tab, desktop):**
+- Model loads and initialises correctly; skeleton states display during fetch.
+- All 6 presets run; fraud verdict + per-feature bar chart + IF side-by-side render correctly.
+- Manual input form submits and returns a result.
+- CSV batch upload works; sortable table renders.
+- Threshold slider drags and re-classifies all rows in real time; histogram threshold line moves.
+- Footer links to v1 repo resolve correctly.
+
+**No deferred issues.** Deploy is clean.
