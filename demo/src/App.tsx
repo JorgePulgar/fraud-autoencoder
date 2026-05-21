@@ -6,6 +6,7 @@ import { useLatency } from '@/hooks/useLatency'
 import { useDemoStore } from '@/store'
 import Header from '@/components/Header'
 import { Alert, AlertDescription } from '@/components/ui/alert'
+import Footer from '@/components/Footer'
 import PresetRunner from '@/components/PresetRunner'
 import ManualInputForm from '@/components/ManualInputForm'
 import VerdictCard from '@/components/VerdictCard'
@@ -130,6 +131,8 @@ export default function App() {
           </>
         )}
       </main>
+
+      <Footer />
 
       {last !== null && (
         <div className="fixed bottom-4 right-4 rounded-lg border border-border bg-card/90 backdrop-blur px-3 py-2">
