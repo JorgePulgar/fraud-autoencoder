@@ -16,7 +16,7 @@
 - [x] **Task 6.1** — Write final English copy. Update the header subtitle, page intro, section labels, button labels, and form helper text to remove placeholder strings and marketing language. Tone matches v1's README: professional, direct, technically honest. Verify by reading every visible string aloud — none should sound salesy or vague.
   - Commit: `docs(demo): final english copy pass`
 
-- [ ] **Task 6.2** — Add the always-visible disclaimer banner near the header: "Portfolio project on public Kaggle data. Not a production fraud system." Use a muted shadcn `Alert` with no dismiss button. Verify: visible on first paint.
+- [x] **Task 6.2** — Add the always-visible disclaimer banner near the header: "Portfolio project on public Kaggle data. Not a production fraud system." Use a muted shadcn `Alert` with no dismiss button. Verify: visible on first paint.
   - Commit: `feat(ui): add portfolio disclaimer banner`
 
 - [ ] **Task 6.3** — Build `src/components/WhyPRAUCPopover.tsx`: a shadcn `Popover` triggered by a help icon next to the histogram. Body explains in 3–4 short sentences why supervised methods would beat the autoencoder on raw F1, and why the autoencoder framing is still the right one. Mirror the language from v1 README's "Why an autoencoder" section. Verify: clicking the icon opens the popover; clicking outside closes it.
