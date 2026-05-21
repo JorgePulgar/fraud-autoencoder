@@ -41,7 +41,7 @@ export default function FeatureBarChart({ perFeatureError }: Props) {
           Per-Feature Reconstruction Error
         </h2>
         <p className="font-mono text-xs text-muted-foreground/60 mt-0.5">
-          Bars above the median are highlighted violet.
+          Squared reconstruction error for each of the 30 input features. Tall bars are the dimensions the model struggled to reproduce — the most anomalous features of this transaction. Bars above the median are highlighted violet.
         </p>
       </div>
       <ResponsiveContainer width="100%" height={220}>

@@ -66,9 +66,15 @@ export default function ManualInputForm({ session, scaler, defaultRaw, onInfer }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <h2 className="font-mono text-sm font-semibold text-muted-foreground uppercase tracking-widest">
-        Manual Transaction Input
-      </h2>
+      <div>
+        <h2 className="font-mono text-sm font-semibold text-muted-foreground uppercase tracking-widest">
+          Manual Transaction Input
+        </h2>
+        <p className="font-mono text-xs text-muted-foreground/60 mt-0.5">
+          Build a custom transaction and run the model on it. V1–V28 are PCA components from the original dataset — their exact meaning is intentionally anonymised.
+          Defaults are seeded from the first preset row.
+        </p>
+      </div>
 
       {/* Time + Amount */}
       <div className="grid grid-cols-2 gap-3">

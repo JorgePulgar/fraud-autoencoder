@@ -78,9 +78,15 @@ export default function CSVUpload({ onRows }: Props) {
 
   return (
     <div className="space-y-3">
-      <h2 className="font-mono text-sm font-semibold text-muted-foreground uppercase tracking-widest">
-        Batch CSV Upload
-      </h2>
+      <div>
+        <h2 className="font-mono text-sm font-semibold text-muted-foreground uppercase tracking-widest">
+          Batch CSV Upload
+        </h2>
+        <p className="font-mono text-xs text-muted-foreground/60 mt-0.5">
+          Run the autoencoder on many transactions at once. Upload any CSV with columns <span className="text-muted-foreground">Time, V1–V28, Amount</span> — a <span className="text-muted-foreground">Class</span> column is ignored if present.
+          Results are sortable by reconstruction error; verdicts update live when you move the threshold slider.
+        </p>
+      </div>
       <div
         onDragOver={(e) => { e.preventDefault(); setIsDragging(true) }}
         onDragLeave={() => setIsDragging(false)}

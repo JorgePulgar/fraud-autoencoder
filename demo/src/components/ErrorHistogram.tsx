@@ -56,6 +56,11 @@ export default function ErrorHistogram({ histogramData }: Props) {
         </h2>
         <WhyPRAUCPopover />
       </div>
+      <p className="font-mono text-xs text-muted-foreground/60">
+        Error distribution across 90 test-set fraud cases and 500 sampled legitimate transactions.
+        The dashed violet line is the current threshold — transactions to its right are classified as fraud.
+        Drag the threshold slider above to see the line move.
+      </p>
       <div className="flex gap-4 font-mono text-xs text-muted-foreground">
         <span className="flex items-center gap-1.5">
           <span className="inline-block w-3 h-3 rounded-sm bg-emerald-500/70" /> Legit

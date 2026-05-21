@@ -56,7 +56,9 @@ export default function PresetRunner({ session, scaler, presets, onInfer }: Prop
           Preset Transactions
         </h2>
         <p className="font-mono text-xs text-muted-foreground/60 mt-0.5">
-          3 legitimate · 3 fraudulent · AE and Isolation Forest verdicts side-by-side.
+          6 real test-set transactions — 3 legit, 3 fraud. Click <span className="text-muted-foreground">Run</span> to pass each through the autoencoder.{' '}
+          <span className="text-muted-foreground">AE</span> = autoencoder verdict (moves with the threshold slider).{' '}
+          <span className="text-muted-foreground">IF</span> = Isolation Forest (precomputed, threshold-independent).
         </p>
       </div>
       <div className="grid grid-cols-1 gap-3">

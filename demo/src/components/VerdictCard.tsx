@@ -42,6 +42,10 @@ export default function VerdictCard({ prediction }: Props) {
           )}
         </div>
       </div>
+      <p className="font-mono text-xs text-muted-foreground/50 mt-2">
+        The autoencoder was trained only on legitimate transactions. High reconstruction error means the input looks unusual — the model couldn't reproduce it well.
+        The verdict is <span className="text-muted-foreground">fraud</span> if the error exceeds the current threshold.
+      </p>
     </div>
   )
 }
