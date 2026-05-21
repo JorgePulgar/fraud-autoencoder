@@ -34,7 +34,7 @@
 - [x] **Task 5.7** — Surface Isolation Forest on `PresetRunner`. Each preset card shows two badges side-by-side: "AE: {verdict}" and "IF: {fraud|legit}". The IF verdict comes from `preset.if_score` thresholded at the IF default (`> 0` is anomaly in sklearn's IsolationForest score convention — confirm by looking at the values in `presets.json`). For manual/CSV inputs, show "IF: N/A — preset only" as a small muted note next to the verdict card. Verify: all 6 presets show both badges; agreement/disagreement is visible at a glance.
   - Commit: `feat(ui): show isolation-forest verdict on preset cards`
 
-- [ ] **Task 5.8** — Layout pass on `App.tsx`. Final composition: Header → (PresetRunner | ManualInputForm) → VerdictCard → FeatureBarChart → ThresholdSlider → ErrorHistogram → CSVUpload → BatchResults → LatencyCounter (pinned corner). Verify the full end-to-end story: load page → click presets → tweak manual → upload CSV → drag threshold slider, watch everything update in sync.
+- [x] **Task 5.8** — Layout pass on `App.tsx`. Final composition: Header → (PresetRunner | ManualInputForm) → VerdictCard → FeatureBarChart → ThresholdSlider → ErrorHistogram → CSVUpload → BatchResults → LatencyCounter (pinned corner). Verify the full end-to-end story: load page → click presets → tweak manual → upload CSV → drag threshold slider, watch everything update in sync.
   - Commit: `feat(ui): compose final phase-5 page layout`
 
 ## Definition of done for Phase 5
