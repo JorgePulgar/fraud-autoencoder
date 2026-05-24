@@ -14,7 +14,7 @@ Detección no supervisada de fraude en tarjetas de crédito mediante un autoenco
 
 <p align="center">
   <a href="https://JorgePulgar.github.io/fraud-autoencoder/">
-    <img src="demo/src/assets/hero.png" alt="demo en vivo de fraud-autoencoder" width="320">
+    <img src="demo/src/assets/demo-screenshot.jpg" alt="fraud-autoencoder live demo">
   </a>
 </p>
 
