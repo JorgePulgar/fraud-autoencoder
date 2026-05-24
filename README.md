@@ -14,7 +14,7 @@ Unsupervised credit card fraud detection using a reconstruction-error autoencode
 
 <p align="center">
   <a href="https://JorgePulgar.github.io/fraud-autoencoder/">
-    <img src="demo/src/assets/hero.png" alt="fraud-autoencoder live demo" width="320">
+    <img src="demo/src/assets/demo-screenshot.jpg" alt="fraud-autoencoder live demo" width="320">
   </a>
 </p>
 
